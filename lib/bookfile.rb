@@ -2,10 +2,13 @@
 
 #############
 # stdlibs
+
 require 'pp'
 
 ##############
 # 3rd party gems
+
+require 'fetcher'
 
 
 ####################

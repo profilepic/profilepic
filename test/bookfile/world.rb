@@ -4,7 +4,7 @@ package 'book-templates/world'
 ## will auto-include all helpers etc. from _scripts/ folder (hierachy/tree)
 
 
-world adapter: 'sqlite3', database: './test/data/world.db'
+world adapter: 'sqlite3', database: './world.db'
 ## will connect to database;
 ## will require all libs
 ## will include all models

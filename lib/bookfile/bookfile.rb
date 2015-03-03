@@ -18,10 +18,10 @@ class Bookfile
 
 
   def download
-##    logger.info( "[datafile] dowload" )
-##    @datasets.each do |dataset|
-##      dataset.download()
-##    end
+    puts "[bookfile] dowload book packages"
+    @packages.each do |package|
+      package.download
+    end
   end
 
 

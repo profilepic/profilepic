@@ -12,7 +12,10 @@ class TestWorld < MiniTest::Test
   def test_world
     builder = Bookfile::Builder.load_file( './test/bookfile/world.rb' )
     bookfile = builder.bookfile
-    bookfile.setup
+    
+    bookfile.download   # download book packages (templates n scripts)
+
+    bookfile.setup      # setups database connections n models
     bookfile.build
 
     assert true  # if we get here - test success
