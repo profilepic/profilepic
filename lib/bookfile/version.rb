@@ -1,10 +1,10 @@
+# encoding: utf-8
 
-
-module BookFile
-  VERSION = '0.0.1'
+module Bookfile
+  VERSION = '0.1.0'
 end
 
 ## add module alias
 
-Bookfile = BookFile
+BookFile = Bookfile
 
