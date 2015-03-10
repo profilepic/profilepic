@@ -9,6 +9,7 @@ require 'pp'
 # 3rd party gems
 
 require 'fetcher'
+require 'zip'        # use $ gem install rubyzip
 
 
 ####################

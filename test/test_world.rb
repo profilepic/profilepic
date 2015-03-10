@@ -15,7 +15,9 @@ class TestWorld < MiniTest::Test
     
     bookfile.download   # download book packages (templates n scripts)
 
-    bookfile.setup      # setups database connections n models
+    bookfile.prepare
+    bookfile.connect
+
     bookfile.build
 
     assert true  # if we get here - test success

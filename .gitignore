@@ -23,3 +23,8 @@ doc/
 
 *.db
 
+#######################
+# ignore book (templates) folder
+
+book/
+

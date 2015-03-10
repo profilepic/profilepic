@@ -22,12 +22,21 @@ class BookPackage     ## change to BookTemplates/BookTheme/BookPack/BookClass/Bo
     @name.gsub('/', '--I--')   # note: will NOT include/return .zip extension
   end
 
-  def local_zip_root  ## todo/fix: change to  local_zip_dir ???
+  def local_zip_dir
     "./tmp"
   end
 
   def local_zip_path  # local zip path
-    "#{local_zip_root}/#{local_zip_name}.zip"
+    "#{local_zip_dir}/#{local_zip_name}.zip"
+  end
+
+  def local_unzip_dir
+    "./book"
+  end
+
+  def local_scripts_dir
+    ## fix: just use _scripts  -- remove helpers in repo!!!
+    "#{local_unzip_dir}/_scripts/helpers"
   end
 
 
@@ -41,22 +50,60 @@ class BookPackage     ## change to BookTemplates/BookTheme/BookPack/BookClass/Bo
     dest_zip = local_zip_path
 
     ## make sure dest folder exists
-    FileUtils.mkdir_p( local_zip_root )  unless Dir.exists?( local_zip_root )
+    FileUtils.mkdir_p( local_zip_dir )  unless Dir.exists?( local_zip_dir )
 
     fetch_book_templates( src, dest_zip )
   end
 
 
   def unzip
-=begin
-    dest_unzip = @config.book_templates_unzip_dir
+    src        = local_zip_path
+    dest_unzip = local_unzip_dir
 
     ## check if folders exists? if not create folder in path
     FileUtils.mkdir_p( dest_unzip )  unless Dir.exists?( dest_unzip )
 
-    unzip( dest_zip, dest_unzip )
+    unzip_book_templates( src, dest_unzip )
+  end
+
+
+  def prepare   ## change to require - why, why not??
+    puts "auto-require/include book scripts in '#{local_scripts_dir}'"
+
+    files = Dir["#{local_scripts_dir}/**/*.rb"]
+    pp files
+
+    files.each_with_index do |file,idx|
+       ## todo/check: check for exceptions???
+       puts "  [#{idx+1}/#{files.count}] try auto-require '#{file}'..."
+       require file
+    end
+
+     ## include Hytext::Helper or use HytextHelper  ??
+     ## include Bookfile::Helper or use BookfileHelper ??
+     ##   check Rails example names for helper modules
+     ##   get Helper module name from book template name ???
+
+=begin
+    res = require 'worlddb/models'
+    if res
+      puts "  include WorldDb::Models"
+      
+      Builder.send :include, WorldDb::Models
+      ## PageCtx.send :include, WorldDb::Models
+      ## BookCtx.send :include, WorldDb::Models
+      
+      ## also add to xxxx ???
+      ## (possible to include as globals ???? how - Object.send :include ???) or
+      ##   Module.send :include ??
+    else
+      ## find a better check - check for constants defined??? if not define???
+      ##  or use constant_missing handler???
+      puts "  assume WorldDb::Models already included ??"
+    end
 =end
   end
+
 
 private
 
