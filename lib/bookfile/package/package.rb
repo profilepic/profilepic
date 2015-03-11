@@ -36,7 +36,7 @@ class BookPackage     ## change to BookTemplates/BookTheme/BookPack/BookClass/Bo
 
   def local_scripts_dir
     ## fix: just use _scripts  -- remove helpers in repo!!!
-    "#{local_unzip_dir}/_scripts/helpers"
+    "#{local_unzip_dir}/_scripts"
   end
 
 

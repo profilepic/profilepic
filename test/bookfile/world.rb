@@ -44,7 +44,10 @@ book do |b|
     p.write "render_toc()" ## render_toc() ## render_toc( opts )
     p.write "render_toc() 2x"
     p.write "render_toc() 3x"
+    
+    p.render_toc( {} )
     ## render :toc   -- auto includes opts???
+
     puts "self.class.name (in page block): #{self.class.name}"
     p.write "continent.count: #{Continent.count}"
     puts "leave index"
@@ -66,7 +69,7 @@ book do |b|
       b.page path, title: "#{country.name} (#{country.code})",
                id:    country.key do |p|
         p.write "render_country(#{country.name})"  ## render_country( country )  ## render_country( country, opts )
-        ## render :country, :locals => {country: country } -- auto includes opts???
+        p.render_country( country, {} )  ### fix: auto-include opts in render - how??
       end
     end
   end

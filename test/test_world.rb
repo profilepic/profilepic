@@ -13,7 +13,8 @@ class TestWorld < MiniTest::Test
     builder = Bookfile::Builder.load_file( './test/bookfile/world.rb' )
     bookfile = builder.bookfile
     
-    bookfile.download   # download book packages (templates n scripts)
+#    bookfile.download   # download book packages (templates n scripts)
+#    bookfile.unzip 
 
     bookfile.prepare
     bookfile.connect
