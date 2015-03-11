@@ -25,7 +25,8 @@ class World < Database   ## change to WorldDatabase or DatabaseWorld - why, why 
       ### check/fix: include as globals/top-level!!! how? possible???
       Builder.send      :include, WorldDb::Models
       PageCtx.send      :include, WorldDb::Models
-      HybookHelper.send :include, WorldDb::Models    ## constants not accesible (include in module too)
+      PageRenderer.send :include, WorldDb::Models ### fix: find easier/better way for local assings for templates
+      HybookHelper.send :include, WorldDb::Models ## constants not accesible (include in module too)
       ## BookCtx.send :include, WorldDb::Models   -- needed for Book context too?? why, why not??
 
       ## also add to xxxx ???

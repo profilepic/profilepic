@@ -27,6 +27,7 @@ require 'bookfile/helpers/misc'       ## module HybookHelper
 
 require 'bookfile/database/database'
 require 'bookfile/package/package'
+require 'bookfile/book/config'
 require 'bookfile/book/book'
 require 'bookfile/bookfile'
 require 'bookfile/builder'

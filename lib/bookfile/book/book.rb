@@ -2,42 +2,49 @@
 
 ###
 ## todo/fix:
-##    render - auto-include opts
+##    render - auto-include/merge (global) book opts ???
 ##    build book twice (std, and inline:true)
 ##  fix: locals - how to set for binding ???
+##
+##  use global inline? helper instead of passing along
+##    opts[:inline] == true  ???? - why, why not???
+
 
 module Bookfile
 
-=begin
-module PageHelper
-  ## auto-load helpers here
-  def render_toc
-    "render_toc"
-  end
- 
-  def render_country( country )
-    "render_country #{country.name}"
-  end
-end
-=end
 
+### fix/todo: make it work without openstruct class for local assigns in erb template
+##   possible -how??
+###   use a single context per page ?? possible?
+##     or do we need a context for every embedded render ??
 
-## todo/fix: move to book/config.rb - why, why not??
+class PageRenderer < OpenStruct
 
-class BookConfig
-  def initialize( hash={} )
-    @hash = hash
+  include HybookHelper
+
+  def initialize( ctx, hash )
+    super( hash )
+    @ctx = ctx  # parent page context (ctx)
   end
-  
-  def templates_dir
-    @hash[:templates_dir]
+
+  def _merge( tmpl, opts={} )
+    ## note: do NOT forget opts - for now added as method arg; add as attribute - why, why not??
+    ##  opts is included in binding
+    text = TextUtils::PageTemplate.new( tmpl ).render( binding )
+    text
   end
-end
+
+  def render( name, opts={}, locals={} )
+    ### note: delegate to parent context (ctx)
+    @ctx.render( name, opts, locals )
+  end
+
+end  # class PageRenderer
+
 
 
 class PageCtx    ## page context for evaluate
 
-  ### include PageHelper
   include HybookHelper
 
   def initialize( config )   ## BookConfig
@@ -70,11 +77,13 @@ class PageCtx    ## page context for evaluate
 
     ### check/fix: trouble with multiple method entries?? e.g. new binding on every call?
     ##    or gets reused (and, thus, we add more and more locals?? )
-    locals.each do |k,v|
+    locals.each do |k,v|   ## check - locals already used by ruby (use assigns ??)
       puts "  add local '#{k}' #{k.class.name} - #{v.class.name}"
     end
 
-    text  = TextUtils::PageTemplate.new( tmpl ).render( binding )
+    ### fix/todo: find a better way to assign locals
+    text = PageRenderer.new( self, locals )._merge( tmpl, opts )
+    ## text  = TextUtils::PageTemplate.new( tmpl ).render( namespace.instance_eval { binding } )
 
     ## use openstruct wrapper - why? why not??
     ## text  = TextUtils::PageTemplate.new( tmpl ).render(  OpenStruct.new(locals).instance_eval { binding }  )

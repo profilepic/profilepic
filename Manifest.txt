@@ -4,6 +4,7 @@ README.md
 Rakefile
 lib/bookfile.rb
 lib/bookfile/book/book.rb
+lib/bookfile/book/config.rb
 lib/bookfile/bookfile.rb
 lib/bookfile/builder.rb
 lib/bookfile/database/database.rb

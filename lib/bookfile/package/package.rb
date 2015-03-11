@@ -118,6 +118,11 @@ def fetch_book_templates( src, dest )
 end
 
 
+######
+# fix/todo:
+#   exclude _pages folder for now
+#    lets us include working live sample pages in template pack
+
 def unzip_book_templates( src, dest, opts={} )
   ### todo/fix: rename or remove root folder -- use opts { root: false or something??}
   #  e.g
