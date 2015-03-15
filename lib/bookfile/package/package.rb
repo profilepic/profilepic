@@ -30,14 +30,15 @@ class BookPackage     ## change to BookTemplates/BookTheme/BookPack/BookClass/Bo
     "#{local_zip_dir}/#{local_zip_name}.zip"
   end
 
-  def local_unzip_dir
-    "./book"
-  end
+
+=begin 
+  def local_unzip_dir() "./book";  end
 
   def local_scripts_dir
     ## fix: just use _scripts  -- remove helpers in repo!!!
     "#{local_unzip_dir}/_scripts"
   end
+=end
 
 
   def download
@@ -56,9 +57,9 @@ class BookPackage     ## change to BookTemplates/BookTheme/BookPack/BookClass/Bo
   end
 
 
-  def unzip
+  def unzip( unzip_dir )
     src        = local_zip_path
-    dest_unzip = local_unzip_dir
+    dest_unzip = unzip_dir        ## local_unzip_dir
 
     ## check if folders exists? if not create folder in path
     FileUtils.mkdir_p( dest_unzip )  unless Dir.exists?( dest_unzip )
@@ -67,10 +68,10 @@ class BookPackage     ## change to BookTemplates/BookTheme/BookPack/BookClass/Bo
   end
 
 
-  def prepare   ## change to require - why, why not??
+  def prepare( unzip_dir )   ## change to require - why, why not??
     puts "auto-require/include book scripts in '#{local_scripts_dir}'"
 
-    files = Dir["#{local_scripts_dir}/**/*.rb"]
+    files = Dir["#{unzip_dir}/_scripts/**/*.rb"]
     pp files
 
     files.each_with_index do |file,idx|

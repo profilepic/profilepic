@@ -14,12 +14,12 @@ class TestWorld < MiniTest::Test
     bookfile = builder.bookfile
     
 #    bookfile.download   # download book packages (templates n scripts)
-#    bookfile.unzip 
+    bookfile.unzip( './tmp/book' ) 
 
-    bookfile.prepare
+    bookfile.prepare( './tmp/book' )
     bookfile.connect
 
-    bookfile.build
+    bookfile.build( './tmp/book' )
 
     assert true  # if we get here - test success
   end

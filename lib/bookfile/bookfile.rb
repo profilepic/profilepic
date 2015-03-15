@@ -24,12 +24,16 @@ class Bookfile
     end
   end
 
-  def unzip
+  ###
+  ## todo/fix - add unzip_dir as an option/config to constructor - why, why not??
+  ##  location needs to get (re)used in prepare too
+  ##  for now pass along unzip_dir again ???
+  def unzip( unzip_dir )
     puts "[bookfile] unzip book packages"
     ### fix: for multiple packages use a number?? - how to make path unique
     ##     for now is ./book 
     @packages.each do |package|
-      package.unzip
+      package.unzip( unzip_dir )
     end
   end
 
@@ -51,20 +55,20 @@ class Bookfile
   end
 
 
-  def prepare
+  def prepare( unzip_dir )
     @databases.each do |database|
       database.prepare    ## require models and include in builder/page ctx
     end
     @packages.each do |package|
-      package.prepare     ## require helpers and include in builder/page ctx
+      package.prepare( unzip_dir )     ## require helpers and include in builder/page ctx
     end
   end
 
 
-  def build
+  def build( unzip_dir )
     puts "[bookfile] build books"
     @books.each do |book|
-      book.build
+      book.build( unzip_dir )
     end
   end
 
