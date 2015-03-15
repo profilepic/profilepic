@@ -69,7 +69,7 @@ class BookPackage     ## change to BookTemplates/BookTheme/BookPack/BookClass/Bo
 
 
   def prepare( unzip_dir )   ## change to require - why, why not??
-    puts "auto-require/include book scripts in '#{local_scripts_dir}'"
+    puts "auto-require/include book scripts in '#{unzip_dir}/_scripts'"
 
     files = Dir["#{unzip_dir}/_scripts/**/*.rb"]
     pp files

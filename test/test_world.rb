@@ -10,16 +10,18 @@ require 'helper'
 class TestWorld < MiniTest::Test
 
   def test_world
+    book_templates_unzip_dir = './tmp/book'
+
     builder = Bookfile::Builder.load_file( './test/bookfile/world.rb' )
     bookfile = builder.bookfile
-    
-#    bookfile.download   # download book packages (templates n scripts)
-    bookfile.unzip( './tmp/book' ) 
 
-    bookfile.prepare( './tmp/book' )
+#    bookfile.download   # download book packages (templates n scripts)
+#    bookfile.unzip( book_templates_unzip_dir ) 
+
+    bookfile.prepare( book_templates_unzip_dir )
     bookfile.connect
 
-    bookfile.build( './tmp/book' )
+    bookfile.build( book_templates_unzip_dir )
 
     assert true  # if we get here - test success
   end

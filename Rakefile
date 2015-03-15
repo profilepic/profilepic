@@ -23,6 +23,9 @@ Hoe.spec 'bookfile' do
     ['props'],         # settings / prop(ertie)s / env / INI
     ['logutils'],     # logging
     ['textutils'],    # e.g.  >= 0.6 && <= 1.0  ## will include logutils, props
+    ['rubyzip'],   ## todo: check if included in ??
+    ['fetcher'],   ## todo: check if included in ??
+    ['hybook']     ## todo: check if included in ??
   ]
 
   self.spec_extras = {
