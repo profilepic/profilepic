@@ -34,7 +34,11 @@ puts "self.class.name (in top level): #{self.class.name}"
 
 
 book do |b|
- 
+
+  ## todo/fix:
+  ##  find a way to pass along opts - why, why not??
+  opts = {}
+
   puts "before first page"
   puts "self.class.name (in book block): #{self.class.name}"
  
@@ -45,7 +49,7 @@ book do |b|
     page.write "render_toc() 2x"
     page.write "render_toc() 3x"
 
-    page.render_toc( {} )
+    page.render_toc( opts )
     ## render :toc   -- auto includes opts???
 
     puts "self.class.name (in page block): #{self.class.name}"
@@ -69,7 +73,7 @@ book do |b|
       b.page path, title: "#{country.name} (#{country.code})",
                id:    country.key do |page|
         page.write "render_country(#{country.name})"  ## render_country( country )  ## render_country( country, opts )
-        page.render_country( country, {} )  ### fix: auto-include opts in render - how??
+        page.render_country( country, opts )  ### fix: auto-include opts in render - how??
       end
     end
   end

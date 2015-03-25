@@ -9,13 +9,16 @@ beer adapter: 'sqlite3', database: './beer.db'
 
 book do |b|
 
-  ### generate what's news in 2014
+  ## todo/fix:
+  ##  find a way to pass along opts - why, why not??
+  opts = {}
 
-  years = [2014,2013,2012,2011,2010]
+  ### generate what's news in 2015
+  years = [2015,2014,2013,2012,2011,2010]
   years.each do |year|
     b.page( "#{year}", title:  "What's News in #{year}?",
                        id: "#{year}" ) do |page|
-      page.write render_whats_news_in_year( year, opts )
+      page.render_whats_news_in_year( year, opts )
     end
   end
 
@@ -24,21 +27,21 @@ book do |b|
 
   b.page( 'breweries', title: 'Breweries Index',
                         id: 'breweries' ) do |page|
-    page.write render_breweries_idx( opts )
+    page.render_breweries_idx( opts )
   end
 
   ### generate beers index
 
   b.page( 'beers', title: 'Beers Index',
                    id: 'beers' ) do |page|
-    page.write render_beers_idx( opts )
+    page.render_beers_idx( opts )
   end
 
   ### generate brands index
 
   b.page( 'brands', title: 'Brands Index',
                     id: 'brands' ) do |page|
-    page.write render_brands_idx( opts )
+    page.render_brands_idx( opts )
   end
 
 
@@ -46,7 +49,7 @@ book do |b|
 
   b.page( 'index', title: 'Contents',
                    id: 'index' ) do |page|
-    page.write render_toc( opts )
+    page.render_toc( opts )
   end
 
 
@@ -66,7 +69,7 @@ book do |b|
     puts "path=#{path}"
     b.page( path, title: "#{country.title} (#{country.code})",
                   id:    "#{country.key}" ) do |page|
-      page.write render_country( country, opts )
+      page.render_country( country, opts )
     end
 
     ## todo - add  b.divider() - for inline version - why, why not ????
