@@ -4,7 +4,25 @@ module Bookfile
 
 class Bookfile
 
-  ## include LogUtils::Logging
+  include LogUtils::Logging
+
+  ## convenience method - use like Bookfile.load_file()
+  def self.load_file( path='./Bookfile' )
+    # Note: return datafile (of course, NOT the builder)
+    # if you want a builder use Bookfile::Builder ;-)
+    builder = Builder.load_file( path )
+    builder.datafile
+  end
+
+  ## another convenience method - use like Bookfile.load()
+  def self.load( code )
+    # Note: return datafile (of course, NOT the builder)
+    # if you want a builder use Bookfile::Builder ;-)
+    builder = Builder.load( code )
+    builder.datafile
+  end
+
+
 
   attr_reader :packages
   attr_reader :databases

@@ -9,6 +9,10 @@ require 'ostruct'
 ##############
 # 3rd party gems
 
+require 'logutils'     # uses Logging etc.
+require 'textutils'    # uses File.read_utf8
+
+
 require 'fetcher'
 require 'zip'        # use $ gem install rubyzip
 require 'hybook'     # todo/fix: check if hybook required/needed for now??

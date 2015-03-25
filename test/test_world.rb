@@ -10,10 +10,9 @@ require 'helper'
 class TestWorld < MiniTest::Test
 
   def test_world
-    book_templates_unzip_dir = './tmp/book'
+    book_templates_unzip_dir = './tmp/book-world'
 
-    builder = Bookfile::Builder.load_file( './test/bookfile/world.rb' )
-    bookfile = builder.bookfile
+    bookfile = Bookfile::Bookfile.load_file( './test/bookfile/world.rb' )
 
 #    bookfile.download   # download book packages (templates n scripts)
 #    bookfile.unzip( book_templates_unzip_dir ) 

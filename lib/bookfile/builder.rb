@@ -5,10 +5,10 @@ module Bookfile
 
 class Builder
 
-  ## include LogUtils::Logging
+  include LogUtils::Logging
 
   def self.load_file( path )
-    code = File.read( path )
+    code = File.read_utf8( path )
     self.load( code )
   end
 
@@ -32,10 +32,19 @@ class Builder
     @bookfile.packages << BookPackage.new( name, opts )
   end
 
+  ## database options
   def world( opts={} )
     puts "world opts: #{opts.inspect}"
-    @bookfile.databases << World.new( opts )
+    @bookfile.databases << WorldDef.new( opts )
   end
+
+  def beer( opts={} )
+    puts "beer opts: #{opts.inspect}"
+    ## todo: to avoid name class use BeerDef, WorldDef ?? etc.
+    @bookfile.databases << BeerDef.new( opts )
+  end
+
+
 
   def book( opts={}, &block )
     puts "book opts: #{opts.inspect}"

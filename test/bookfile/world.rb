@@ -39,17 +39,17 @@ book do |b|
   puts "self.class.name (in book block): #{self.class.name}"
  
   b.page 'index', title: 'Contents',
-                  id:    'index'   do |p|
+                  id:    'index'   do |page|
     puts "enter index"
-    p.write "render_toc()" ## render_toc() ## render_toc( opts )
-    p.write "render_toc() 2x"
-    p.write "render_toc() 3x"
-    
-    p.render_toc( {} )
+    page.write "render_toc()" ## render_toc() ## render_toc( opts )
+    page.write "render_toc() 2x"
+    page.write "render_toc() 3x"
+
+    page.render_toc( {} )
     ## render :toc   -- auto includes opts???
 
     puts "self.class.name (in page block): #{self.class.name}"
-    p.write "continent.count: #{Continent.count}"
+    page.write "continent.count: #{Continent.count}"
     puts "leave index"
   
    puts "continent.count: #{Continent.count}"
@@ -67,9 +67,9 @@ book do |b|
       puts "path=#{path}"
     
       b.page path, title: "#{country.name} (#{country.code})",
-               id:    country.key do |p|
-        p.write "render_country(#{country.name})"  ## render_country( country )  ## render_country( country, opts )
-        p.render_country( country, {} )  ### fix: auto-include opts in render - how??
+               id:    country.key do |page|
+        page.write "render_country(#{country.name})"  ## render_country( country )  ## render_country( country, opts )
+        page.render_country( country, {} )  ### fix: auto-include opts in render - how??
       end
     end
   end
