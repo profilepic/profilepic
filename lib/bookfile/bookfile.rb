@@ -11,7 +11,7 @@ class Bookfile
     # Note: return datafile (of course, NOT the builder)
     # if you want a builder use Bookfile::Builder ;-)
     builder = Builder.load_file( path )
-    builder.datafile
+    builder.bookfile
   end
 
   ## another convenience method - use like Bookfile.load()
@@ -19,7 +19,7 @@ class Bookfile
     # Note: return datafile (of course, NOT the builder)
     # if you want a builder use Bookfile::Builder ;-)
     builder = Builder.load( code )
-    builder.datafile
+    builder.bookfile
   end
 
 
