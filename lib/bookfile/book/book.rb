@@ -16,21 +16,30 @@ class PageCtx    ## page context for evaluate
 
   include HybookHelper
 
+  attr_reader :content
+
   def initialize( config )   ## BookConfig
-    ## pass in templates_dir here
-    ##   ## TEMPLATES_DIR = ??  -- passed in as config
-    ##  or pass in class to help find templates???
-    ##  TemplateMan( ??? )
-    @config = config
+    @config  = config
+    @content = ''    ## rename to body,text,buf,out - why, why not???
+    
+    ## track rendering (stack) level - only output if in top-level (1)
+    ##  -- check/todo - is there a better way???
+    ##  use a (separate) partial method  or keep using on render method etc. ???
+    ##   any other ways??
+    @level = 0
   end
+
 
   def write( text )
     puts "*** write:"
-    puts "  #{text}"
+    ## puts "  #{text}"
+    
+    @content << text
   end
 
   def render( name, opts={}, locals={} )  ## possible? - make opts required ??
-    puts "*** render #{name}:"
+    @level +=1
+    puts "*** render(#{@level})  #{name}:"
 
     tmpl  = File.read_utf8( "#{@config.templates_dir}/#{name}.md" )  ## name e.g. includes/_city
 
@@ -42,7 +51,15 @@ class PageCtx    ## page context for evaluate
 
     text  = TextUtils::PageTemplate.new( tmpl ).render( binding )
 
-    puts "  #{text}"
+    ## note: only add text to content if top-level render call
+    ##   (do NOT add for partials/includes/etc.) 
+    if @level == 1
+      @content << text
+    end
+
+    @level -=1
+
+    ## puts "  #{text}"
     text
   end
 
@@ -68,17 +85,25 @@ end  # class PageCtx
 
 class BookCtx
 
-  def initialize( config )
-    @config = config
+  def initialize( config, book_opts={} )
+    @config  = config
+    ## todo: add opts to config ???
+    ##  e.g. title, layout, inline ??? - why? why not??
+    @builder = BookBuilder.new( config.pages_dir, book_opts )
   end
 
-  def page( name, opts={} )  ## &block
-    puts "[BookCtx#page] #{name} opts:#{opts.inspect}"
-    
+  ## change name to path - why, why not??
+  def page( name, page_opts={} )  ## &block
+    puts "[BookCtx#page] #{name} opts:#{page_opts.inspect}"
+
     puts "[BookCtx#page] before yield"
-    ctx = PageCtx.new( @config )   ## pass along book configs
+    ctx = PageCtx.new( @config )   ## pass along self (bookctx) as parent
     yield( ctx )  ## same as - ctx.instance_eval( &block )
     puts "[BookCtx#page] after yield"
+
+    @builder.page( name, page_opts ) do |page|
+      page.write ctx.content
+    end
   end
 
 end  # class BootCtx
@@ -92,9 +117,19 @@ class BookDef
   end
 
   def build( unzip_dir )
-    config = BookConfig.new( templates_dir: "#{unzip_dir}/_templates" )
-    ctx = BookCtx.new( config )
-    @proc.call( ctx )  ## same as - ctx.instance_eval( &@codeblock ) -- use instance_eval - why, why not??
+    defaults = {  templates_dir: "#{unzip_dir}/_templates",
+                  pages_dir:     "#{unzip_dir}/_pages"  }
+
+    ## note:
+    ##   (auto)build two versions:
+    ##   1) multi-page version - for (easy) browsing
+    ##   2) all-in-one-page version - for (easy)pdf conversion
+
+    multi_page_ctx = BookCtx.new( BookConfig.new( defaults ))
+    @proc.call( multi_page_ctx )  ## same as - ctx.instance_eval( &@codeblock ) -- use instance_eval - why, why not??
+
+    one_page_ctx = BookCtx.new( BookConfig.new( defaults ), inline: true )
+    @proc.call( one_page_ctx )  ## same as - ctx.instance_eval( &@codeblock ) -- use instance_eval - why, why not??
   end
 end  # class BookDef
 

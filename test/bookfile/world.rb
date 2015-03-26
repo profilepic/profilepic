@@ -30,6 +30,11 @@ end
 =end
 
 
+#################
+# self.class.name (in top level): Bookfile::Builder
+# self.class.name (in book block): Bookfile::Builder
+# self.class.name (in page block): Bookfile::Builder
+
 puts "self.class.name (in top level): #{self.class.name}"
 
 
