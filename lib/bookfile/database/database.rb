@@ -86,4 +86,37 @@ class BeerDef < Database   ## change to BeerDatabase or DatabaseBeer - why, why 
 end  # class BeerDef
 
 
+class FootballDef < Database   ## change to FootballDatabase or DatabaseFootball - why, why not???
+  def initialize( db_config )  ## check - if it works by default (no initialze specfied)
+    super
+  end
+
+  def prepare   ## change to require - why, why not??
+    puts "setup football: #{@db_config.inspect}"
+
+    res = require 'sportdb/models'
+
+    ## also add to xxxx ???
+    ## (possible to include as globals ???? how - Object.send :include ???) or
+    ##   Module.send :include ??
+
+    if res == false
+      ## find a better check - check for constants defined??? if not define???
+      ##  or use constant_missing handler???
+      puts "  todo/fix: SportDb::Models already included ??"
+    end
+
+    ## for now always include
+    puts "  include SportDb::Models"
+
+    ### check/fix: include as globals/top-level!!! how? possible???
+    Builder.send      :include, SportDb::Models
+    PageCtx.send      :include, SportDb::Models
+    HybookHelper.send :include, SportDb::Models ## constants not accesible (include in module too)
+
+
+  end # method prepare
+end  # class FootballDef
+
+
 end # module Bookfile

@@ -32,6 +32,7 @@ class Builder
     @bookfile.packages << BookPackage.new( name, opts )
   end
 
+  ###########################
   ## database options
   def world( opts={} )
     puts "world opts: #{opts.inspect}"
@@ -42,6 +43,11 @@ class Builder
     puts "beer opts: #{opts.inspect}"
     ## todo: to avoid name class use BeerDef, WorldDef ?? etc.
     @bookfile.databases << BeerDef.new( opts )
+  end
+
+  def football( opts={} )
+    puts "football opts: #{opts.inspect}"
+    @bookfile.databases << FootballDef.new( opts )
   end
 
 
