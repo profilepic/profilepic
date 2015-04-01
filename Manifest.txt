@@ -8,14 +8,13 @@ lib/bookfile/book/config.rb
 lib/bookfile/bookfile.rb
 lib/bookfile/builder.rb
 lib/bookfile/database/database.rb
-lib/bookfile/helpers/markdown.rb
-lib/bookfile/helpers/misc.rb
 lib/bookfile/package/package.rb
 lib/bookfile/version.rb
 test/bookfile/beer.rb
 test/bookfile/football.rb
 test/bookfile/world.rb
 test/helper.rb
+test/test_basics.rb
 test/test_beer.rb
 test/test_football.rb
 test/test_world.rb

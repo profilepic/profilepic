@@ -6,28 +6,33 @@
 require 'pp'
 require 'ostruct'
 
+
 ##############
 # 3rd party gems
 
-require 'logutils'     # uses Logging etc.
-require 'textutils'    # uses File.read_utf8
+
+#########################################
+# "standalone" version - pull in hybook
+#  - todo/check - possible to use bookfile w/o hybook?? why, why not??
+
+=begin
+unless defined?(Hybook)
+  require 'logutils'    # uses Logging etc.    -- todo: get required by hybook - remove??
+  require 'textutils'   # uses File.read_utf8   -- todo: get required by hybook - remove??
+  require 'hybook'      # todo/fix: check if hybook required/needed for now??
+end
+=end
+## else assumes hybook gem aready required (avoid circular require)
 
 
 require 'fetcher'
 require 'zip'        # use $ gem install rubyzip
-require 'hybook'     # todo/fix: check if hybook required/needed for now??
+
 
 ####################
 # our own code
 
 require 'bookfile/version'  # let it always go first
-
-###
-# helpers
-# todo/fix: move helpers to hybook
-require 'bookfile/helpers/markdown'   ## module HybookHelper
-require 'bookfile/helpers/misc'       ## module HybookHelper
-
 
 require 'bookfile/database/database'
 require 'bookfile/package/package'
@@ -36,3 +41,7 @@ require 'bookfile/book/book'
 require 'bookfile/bookfile'
 require 'bookfile/builder'
 
+
+
+# say hello
+puts Bookfile.banner   if $DEBUG || (defined?($RUBYLIBS_DEBUG) && $RUBYLIBS_DEBUG)

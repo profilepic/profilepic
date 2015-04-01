@@ -9,6 +9,11 @@
 ##    opts[:inline] == true  ???? - why, why not???
 
 
+module HybookHelper
+   ## note: "quickfix" - find a better way to forward declare (lives in hybook)???
+end
+
+
 module Bookfile
 
 
