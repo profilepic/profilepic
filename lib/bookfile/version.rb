@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Bookfile
-  VERSION = '0.2.0'
+  VERSION = '0.2.1'
 
   def self.banner
     "bookfile/#{VERSION} on Ruby #{RUBY_VERSION} (#{RUBY_RELEASE_DATE}) [#{RUBY_PLATFORM}]"

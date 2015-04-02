@@ -10,20 +10,7 @@ require 'ostruct'
 ##############
 # 3rd party gems
 
-
-#########################################
-# "standalone" version - pull in hybook
-#  - todo/check - possible to use bookfile w/o hybook?? why, why not??
-
-=begin
-unless defined?(Hybook)
-  require 'logutils'    # uses Logging etc.    -- todo: get required by hybook - remove??
-  require 'textutils'   # uses File.read_utf8   -- todo: get required by hybook - remove??
-  require 'hybook'      # todo/fix: check if hybook required/needed for now??
-end
-=end
-## else assumes hybook gem aready required (avoid circular require)
-
+require 'hybook'
 
 require 'fetcher'
 require 'zip'        # use $ gem install rubyzip
@@ -44,4 +31,4 @@ require 'bookfile/builder'
 
 
 # say hello
-puts Bookfile.banner   if $DEBUG || (defined?($RUBYLIBS_DEBUG) && $RUBYLIBS_DEBUG)
+puts Bookfile.banner   if defined?($RUBYLIBS_DEBUG) && $RUBYLIBS_DEBUG

@@ -25,7 +25,7 @@ Hoe.spec 'bookfile' do
     ['textutils'],    # e.g.  >= 0.6 && <= 1.0  ## will include logutils, props
     ['fetcher'],   ## todo: check if included in ??
     ['rubyzip'],   ## todo: check if included in ??
-    ### ['hybook']     ## avoid circular dependency - do NOT include
+    ['hybook'],   ## include props,logutils,textutils ?? already included w/ hybook ??
   ]
 
   self.spec_extras = {
