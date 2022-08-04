@@ -1,0 +1,80 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    artfactory (0.2.0)
+      backgrounds (>= 0.2.0)
+      pixelart (>= 1.3.2)
+    backgrounds (0.2.0)
+      pixelart (>= 1.3.2)
+      spritesheet (>= 1.1.0)
+    chunky_png (1.4.0)
+    cocos (0.1.1)
+      csvreader (>= 1.2.5)
+      iniparser (>= 1.0.1)
+      tabreader (>= 1.0.1)
+    coolcats (0.1.1)
+      pixelart (>= 1.3.1)
+    csvjson (1.0.1)
+    csvreader (1.2.5)
+      csvjson (>= 1.0.0)
+      csvyaml (>= 0.1.0)
+      tabreader (>= 1.0.1)
+    csvyaml (1.0.0)
+    iniparser (1.0.1)
+    mini_magick (4.11.0)
+    moonbirds (1.1.1)
+      artfactory (>= 0.2.0)
+      backgrounds (>= 0.2.0)
+      pixelart (>= 1.3.2)
+    mustermann (2.0.2)
+      ruby2_keywords (~> 0.0.1)
+    nouns (0.1.1)
+      pixelart (>= 1.3.1)
+    originals (1.2.1)
+      backgrounds
+      coolcats (>= 0.1.1)
+      moonbirds (>= 1.1.1)
+      nouns (>= 0.1.1)
+      punks (>= 0.5.2)
+      shibainus (>= 0.1.1)
+      webclient
+    pixelart (1.3.5)
+      chunky_png
+      cocos
+      mini_magick
+      pixelart-colors
+    pixelart-colors (0.1.0)
+    profilepic (0.1.0)
+      originals
+      sinatra
+      webrick
+    punks (0.5.2)
+      artfactory (>= 0.2.0)
+      backgrounds (>= 0.2.0)
+      pixelart (>= 1.3.2)
+    rack (2.2.4)
+    rack-protection (2.2.2)
+      rack
+    ruby2_keywords (0.0.5)
+    shibainus (0.1.1)
+      pixelart (>= 1.3.2)
+    sinatra (2.2.2)
+      mustermann (~> 2.0)
+      rack (~> 2.2)
+      rack-protection (= 2.2.2)
+      tilt (~> 2.0)
+    spritesheet (1.1.0)
+      pixelart (>= 1.3.1)
+    tabreader (1.0.1)
+    tilt (2.0.11)
+    webclient (0.2.2)
+    webrick (1.7.0)
+
+PLATFORMS
+  x64-mingw-ucrt
+
+DEPENDENCIES
+  profilepic
+
+BUNDLED WITH
+   2.3.7
