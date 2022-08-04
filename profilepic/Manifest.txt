@@ -1,0 +1,12 @@
+CHANGELOG.md
+Manifest.txt
+README.md
+Rakefile
+bin/profilepic
+lib/profilepic.rb
+lib/profilepic/public/style.css
+lib/profilepic/service.rb
+lib/profilepic/version.rb
+lib/profilepic/views/index.erb
+lib/profilepic/views/layout.erb
+lib/profilepic/views/shared/_version.erb

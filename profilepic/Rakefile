@@ -1,0 +1,34 @@
+require 'hoe'
+require './lib/profilepic/version.rb'
+
+
+Hoe.spec 'profilepic' do
+
+  self.version = Profilepic::VERSION
+
+  self.summary = "profilepic - profile pic(ture) as a service"
+  self.description = summary
+
+  self.urls    = { home: 'https://github.com/profilepic/profilepic' }
+
+  self.author  = 'Gerald Bauer'
+  self.email   = 'wwwmake@googlegroups.com'
+
+  # switch extension to .markdown for gihub formatting
+  self.readme_file  = 'README.md'
+  self.history_file = 'CHANGELOG.md'
+
+  self.extra_deps = [
+    ['originals'],
+    ['sinatra'],
+    ['webrick'],
+  ]
+
+  self.licenses = ['Public Domain']
+
+  self.spec_extras = {
+    required_ruby_version: '>= 2.3'
+  }
+
+end
+
