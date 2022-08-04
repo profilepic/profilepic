@@ -1,0 +1,3 @@
+require 'profilepic'
+
+run ProfilepicService
