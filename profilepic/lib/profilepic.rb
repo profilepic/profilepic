@@ -8,6 +8,7 @@ require 'webrick'
 
 ## our own code
 require 'profilepic/version'    # note: let version always go first
+require 'profilepic/builder'
 require 'profilepic/service'
 
 

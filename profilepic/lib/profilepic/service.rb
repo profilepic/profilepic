@@ -1,57 +1,229 @@
+
+###
+# helpers
+#  to generate
+
+def radio_options( options,
+                     name:,
+                     legend: )
+
+  buf = <<TXT
+<fieldset>
+    <legend>#{legend}:</legend>
+TXT
+
+options.each_with_index do |option,i|
+
+  value = option.downcase
+  label = option
+
+buf += <<TXT
+<div>
+  <input type="radio" id="#{name}#{i}" name="#{name}" value="#{value}"
+            #{ i==0 ? 'checked' : '' }
+       <label for="#{name}#{i}">#{label}</label>
+</div>
+TXT
+end
+
+buf += "</fieldset>\n"
+buf
+end
+
+
+
+MARC_ARCHETYPE = [
+ 'Marc',
+ 'Marc Mid',
+ 'Marc Dark',
+ 'Marc Albino',
+ 'Marc Golden',
+ 'Mad Lad',
+ 'Zombie',
+ 'Ape',
+ 'Ape Golden',
+ 'Ape Pink',
+ 'Alien',
+ 'Alien Green',
+ 'Devil',
+ 'Orc',
+ 'Skeleton',
+ 'Bot']
+
+
+MARC_EYES = [
+  'Blue Eyes',
+  'Green Eyes',
+]
+
+MARC_FACE = [
+  'Blue Eye Shadow',
+  'Green Eye Shadow',
+  'Purple Eye Shadow',
+  'Clown Eyes Blue',
+  'Clown Eyes Green',
+  'Bagner',
+  'Marc Tyson',
+  'Tears',
+]
+
+MARC_BEARD = [
+  'Big Beard White',
+  'Big Beard',
+  'Chinstrap',
+  'Front Beard',
+  'Front Beard Dark',
+  'Full Mustache',
+  'Full Mustache Dark',
+  'Goat',
+  'Goat Dark',
+  'Handlebar',
+  'Luxurious Beard',
+  'Mustache',
+  'Mutton Chop',
+  'Normal Beard',
+  'Normal Beard Black',
+  'Shadow Beard',
+  'Soul Patch',
+]
+
+MARC_HAIR = [
+  'Blonde Bob',
+  'Chad',
+  'Clown Hair',
+  'Crazy White Hair',
+  'Crazy Hair',
+  'Frumpy Hair',
+  'Marc Three',
+  'Purple Hair',
+  'Stringy Hair',
+  'Vampire Hair',
+  'Wild Blonde Hair',
+  'Wild Hair',
+]
+
+MARC_HEADWEAR = [
+  'Bandana',
+  'Beanie',
+  'Bunny Ears',
+  'Cap',
+  'Skull Cap',
+  'Cap Forward',
+  'Police Cap',
+  'Cowboy Hat',
+  'Do Rag',
+  'Fast Food',
+  'Marcdonalds',
+  'Fedora',
+  'Headband',
+  'Roaring Headband',
+  'Hoodie',
+  'Purple Hoodie',
+  'Knitted Cap',
+  'Laurels',
+  'Shemagh',
+  'Tassle Hat',
+  'Tiarra',
+  'Top Hat',
+  'Uncle Sam',
+  'Viking',
+  'Welding Goggles',
+]
+
+
+MARC_EYEWEAR = [
+  '3D Glasses',
+  'Aviators',
+  'Big Shades',
+  'Classic Shades',
+  'Deal With It',
+  'Glasses',
+  'Gold Glasses',
+  'Horned-Rim Glasses',
+  'Monocle',
+  'Nerd Glasses',
+  'Pink Shades',
+  'Polarized',
+  'Polarized White',
+  'Regular Shades',
+  'Small Shades',
+  'VR Headset',
+  'Eye Mask',
+  'Eye Patch',
+  'Lasers']
+
+MARC_MOUTH_PROP = [
+  'Cigar',
+  'Cigarette',
+  'Hookah',
+  'Pipe',
+  'Vape',
+  'Medical Mask',
+  'Bubble Gum' ]
+
+
+
+
 class ProfilepicService < Sinatra::Base
+
+  get '/cache' do
+
+html =<<HTML
+<pre>
+   #{IMAGES.size} image(s) in cache:
+
+
+</pre>
+HTML
+    html
+  end
+
+
 
   get '/' do
     erb :index
   end
 
+  get '/marcs' do
+    erb :marcs
+  end
+
+
+  get '/generate_marcs' do
+
+    r = ImageReq.build_marc( params )
+
+    img = r.image
+
+   blob = img.image.to_blob
+   IMAGES[ r.image_key ] = blob
+   redirect "/#{r.image_key}.png"
+ end
+
 
   get '/generate' do
-     type       = params[:t]          || "punk"
-     attributes = params[:attributes] || ""
-     zoom       = params[:z]          || "1"
-     background = params[:bg]         || "none"
 
-     txt= <<TXT
-  image generation (string) params:
-     type:        >#{type}<  - #{type.class.name}
-     attributes:  >#{attributes}< - #{attributes.class.name}
-     zoom:        >#{zoom}<   - #{zoom.class.name}
-     background   >#{background}<   - #{background.class.name}
-TXT
+     r = ImageReq.build( params )
 
-    # convert attributes to array
-    ##   allow various separators
-    attributes = attributes.split( %r{[,;|+/]+} )
-    attributes = attributes.map { |attr| attr.strip }
-    attributes = attributes.select { |attr| !attr.empty?}   ## remove empty strings (if any)
-
-    type       = type.downcase.strip
-    zoom       = zoom.strip.to_i( 10 )
-    background = background.downcase.strip
-
-    txt += <<TXT
-  resulting in:
-       type:  >#{type}<  - #{type.class.name}
-       #{attributes.size} attribute(s):
-        #{attributes.join(', ')}
-       zoom @ #{zoom}x - #{zoom.class.name}
-       background   >#{background}<   - #{background.class.name}
-TXT
-
-     puts "generate request:"
-     puts txt
-
-    img = Original::Image.fabricate( type, *attributes )
-    img = img.background( background )   if background != 'none'
-    img = img.zoom( zoom )  if [2,3,4,5,6,7,8,9,10,20].include?( zoom )
-
-    #  check - add a debug/save option - why? why not?
-    # img.save( "./tmp/profilepic-#{Time.now.to_i}.png" )
-
-    headers( 'Content-Type' => "image/png" )
+     img = r.image
 
     blob = img.image.to_blob
-    blob
+    IMAGES[ r.image_key ] = blob
+    redirect "/#{r.image_key}.png"
+  end
+
+
+  get '/:key.png' do
+    puts "  .png image request for key: >#{params[:key]}<"
+
+    blob = IMAGES[ params[:key] ]
+
+    if blob
+      headers( 'Content-Type' => "image/png" )
+      blob
+    else
+        "404 not found; sorry no generated .png image found for key >#{params[:key]}<"
+    end
   end
 end
 

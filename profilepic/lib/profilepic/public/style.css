@@ -5,12 +5,12 @@ body {
 
  a, a:visited {
   text-decoration: none;
-  color: maroon;
+  /* color: maroon; */
  }
 
  a:hover {
   text-decoration: underline;
-  color: maroon;
+  /* color: maroon; */
  }
 
 
