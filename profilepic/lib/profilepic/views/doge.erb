@@ -3,7 +3,8 @@
 </p>
 
 
-<h1>Design Your Own Marc (24×24) Wizard</h1>
+
+<h1>Design Your Own Doge Shiba Inu (24×24) Wizard</h1>
 
 <p>Yes, you can!
 Generate your own originals that you
@@ -12,45 +13,27 @@ own 100% forever.
 
 
 
-<form action="/generate_marcs" method="get" id="form1">
+<form action="/generate_doge" method="get" id="form1">
 
 
-<%= radio_options( MARC_ARCHETYPE,
+<%= radio_options( DOGE_ARCHETYPE,
                    name: 't',
-                   legend: 'Select a marc base (archetype)' ) %>
+                   legend: 'Select a doge shiba inu base (archetype)' ) %>
 
 Options:
 
-
-<%= radio_options( ['None']+MARC_EYES,
-                   name: 'eyes',
-                   legend: 'Select eyes (extras)' ) %>
-
-<%= radio_options( ['None']+MARC_FACE,
-                   name: 'face',
-                   legend: 'Select face (extras)' ) %>
-
-<%= radio_options( ['None']+MARC_BEARD,
-                   name: 'beard',
-                   legend: 'Select beard' ) %>
-
-<%= radio_options( ['None']+MARC_HAIR,
+<%= radio_options( ['None']+DOGE_HAIR,
                    name: 'hair',
                    legend: 'Select hair' ) %>
 
-<%= radio_options( ['None']+MARC_HEADWEAR,
+<%= radio_options( ['None']+DOGE_HEADWEAR,
                    name: 'headwear',
                    legend: 'Select headwear' ) %>
 
 
-<%= radio_options( ['None']+MARC_EYEWEAR,
+<%= radio_options( ['None']+DOGE_EYEWEAR,
                    name: 'eyewear',
                    legend: 'Select eyewear' ) %>
-
-<%= radio_options( ['None']+MARC_MOUTH_PROP,
-                   name: 'mouth',
-                   legend: 'Select mouth prop' ) %>
-
 
 <div>
    <button type="submit" form="form1" value="Submit"
@@ -74,7 +57,6 @@ Or
   Examples:
 </p>
   <ul>
-    <li>Normal Beard,  Big Shades</li>
     <li>Crazy Hair, 3D Glasses</li>
     <li>Headband</li>
   </ul>

@@ -31,6 +31,41 @@ buf
 end
 
 
+DOGE_ARCHETYPE = [
+  'Classic',
+  'Dark',
+  'Zombie',
+  'Alien',
+]
+
+DOGE_HAIR = [
+ 'Crazy Hair',
+]
+
+DOGE_HEADWEAR = [
+  'Beanie',
+  'Cap',
+  'Cap Forward',
+  'Cowboy Hat',
+  'Fedora',
+  'Knitted Cap',
+  'Top Hat',
+  'Bandana',
+  'Headband',
+  'Tiara',
+]
+
+DOGE_EYEWEAR = [
+  '3D Glasses',
+  'Big Shades',
+  'Classic Shades',
+  'Regular Shades',
+  'Small Shades',
+  'Nerd Glasses',
+  'Eye Patch',
+]
+
+
 
 MARC_ARCHETYPE = [
  'Marc',
@@ -188,6 +223,10 @@ HTML
     erb :marcs
   end
 
+  get '/doge' do
+    erb :doge
+  end
+
 
   get '/generate_marcs' do
 
@@ -199,6 +238,18 @@ HTML
    IMAGES[ r.image_key ] = blob
    redirect "/#{r.image_key}.png"
  end
+
+
+ get '/generate_doge' do
+
+  r = ImageReq.build_doge( params )
+
+  img = r.image
+
+ blob = img.image.to_blob
+ IMAGES[ r.image_key ] = blob
+ redirect "/#{r.image_key}.png"
+end
 
 
   get '/generate' do

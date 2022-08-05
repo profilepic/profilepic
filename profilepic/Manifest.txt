@@ -8,6 +8,7 @@ lib/profilepic/builder.rb
 lib/profilepic/public/style.css
 lib/profilepic/service.rb
 lib/profilepic/version.rb
+lib/profilepic/views/doge.erb
 lib/profilepic/views/index.erb
 lib/profilepic/views/layout.erb
 lib/profilepic/views/marcs.erb

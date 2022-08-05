@@ -44,7 +44,7 @@ GEM
       mini_magick
       pixelart-colors
     pixelart-colors (0.1.0)
-    profilepic (0.1.1)
+    profilepic (0.1.2)
       originals
       sinatra
       webrick

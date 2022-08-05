@@ -56,23 +56,32 @@ class ImageReq    ## (Generate) Image Request
            background: background )
   end
 
+  def self.build_doge( params )
+    puts "==> image request params:"
+    pp params
 
-  def self._norm_key( str )
-    str.downcase.strip
+      name = 'doge'
+      archetype = _norm_key( params[:t] || 'classic' )
+      more_attributes = _parse_attributes( params[:attributes] || '' )
+
+      hair      = _norm_key( params[:hair] || 'none' )
+      headwear  = _norm_key( params[:headwear] || 'none' )
+      eyewear  = _norm_key( params[:eyewear] || 'none' )
+
+      zoom       = _parse_zoom( params[:z] || '1' )
+      background = _norm_key( params[:bg] || 'none' )
+
+      attributes = [archetype]
+      attributes << hair       if hair != 'none'
+      attributes << headwear    if headwear != 'none'
+      attributes << eyewear    if eyewear != 'none'
+
+      new( name: name,
+           attributes:  attributes + more_attributes,
+           zoom: zoom,
+           background: background )
   end
 
-  def self._parse_attributes( str )
-    # convert attributes to array
-    ##   allow various separators
-    attributes = str.split( %r{[,;|+/]+} )
-    attributes = attributes.map { |attr| attr.strip }
-    attributes = attributes.select { |attr| !attr.empty?}   ## remove empty strings (if any)
-    attributes
-  end
-
-  def self._parse_zoom( str )
-    str.strip.to_i( 10 )
-  end
 
 
   attr_reader :name,
@@ -101,5 +110,26 @@ class ImageReq    ## (Generate) Image Request
              end
      @key
   end
+
+#####
+#  (static) helpers
+
+def self._norm_key( str )
+  str.downcase.strip
+end
+
+def self._parse_attributes( str )
+  # convert attributes to array
+  ##   allow various separators
+  attributes = str.split( %r{[,;|+/]+} )
+  attributes = attributes.map { |attr| attr.strip }
+  attributes = attributes.select { |attr| !attr.empty?}   ## remove empty strings (if any)
+  attributes
+end
+
+def self._parse_zoom( str )
+  str.strip.to_i( 10 )
+end
+
 end
 
