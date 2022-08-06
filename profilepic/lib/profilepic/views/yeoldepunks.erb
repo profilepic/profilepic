@@ -1,0 +1,91 @@
+<p style="font-size: 80%;">
+    <a href="/">« Profile Pic(ture) As A Service</a>
+</p>
+
+
+
+<h1>Design Your Own Matt &amp; John's® Ye Olde' Punk (Anno 2017) (24×24) Wizard</h1>
+
+<p>Yes, you can!
+Generate your own originals that you
+own 100% forever.
+</p>
+
+
+
+<form action="/generate_yeoldepunks" method="get" id="form1">
+
+
+<%= radio_options( YEOLDEPUNK_ARCHETYPE,
+                   name: 't',
+                   legend: "Select a ye olde' punk  base (archetype)" ) %>
+
+Options:
+
+<%= radio_options( ['None']+YEOLDEPUNK_HAIR,
+                   name: 'hair',
+                   legend: 'Select hair' ) %>
+
+¹: Note: Pink With Hat is a hair+headwear combo.
+
+<%= radio_options( ['None']+YEOLDEPUNK_BEARD,
+                   name: 'beard',
+                   legend: 'Select beard' ) %>
+
+<%= radio_options( ['None']+YEOLDEPUNK_EYES,
+                   name: 'eyes',
+                   legend: 'Select eyes (make-up)' ) %>
+
+
+
+<%= radio_options( ['None']+YEOLDEPUNK_EYEWEAR,
+                   name: 'eyewear',
+                   legend: 'Select eyewear' ) %>
+
+
+<%= radio_options( ['None']+YEOLDEPUNK_NOSE,
+                   name: 'nose',
+                   legend: 'Select nose accessory' ) %>
+
+<%= radio_options( ['None']+YEOLDEPUNK_BLEMISH,
+                   name: 'blemish',
+                   legend: 'Select blemish' ) %>
+
+
+<%= radio_options( ['None']+YEOLDEPUNK_MOUTH,
+                   name: 'mouth',
+                   legend: 'Select mouth expression / lipstick make-up' ) %>
+
+
+<%= radio_options( ['None']+YEOLDEPUNK_MOUTH_PROP,
+                   name: 'mouthprop',
+                   legend: 'Select mouth prop' ) %>
+
+
+<%= radio_options( ['None']+YEOLDEPUNK_EARRING,
+                   name: 'earring',
+                   legend: 'Select earring' ) %>
+
+
+<%= radio_options( ['None']+YEOLDEPUNK_HEADWEAR,
+                   name: 'headwear',
+                   legend: 'Select headwear' ) %>
+
+¹: Note: Headband (f) is a (black) hair+headwear combo.
+
+
+<%= radio_options( ['None']+YEOLDEPUNK_NECK,
+                   name: 'neck',
+                   legend: 'Select neck accessory' ) %>
+
+
+<div>
+   <button type="submit" form="form1" value="Submit"
+      style="font-size: 400%; color: white; background-color: blue;">Generate Profile Pic(ture) in .PNG Format</button>
+</div>
+
+
+
+<%= erb :'shared/_more_options' %>
+
+</form>

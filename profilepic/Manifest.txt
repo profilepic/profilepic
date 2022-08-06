@@ -14,3 +14,4 @@ lib/profilepic/views/layout.erb
 lib/profilepic/views/marcs.erb
 lib/profilepic/views/shared/_more_options.erb
 lib/profilepic/views/shared/_version.erb
+lib/profilepic/views/yeoldepunks.erb

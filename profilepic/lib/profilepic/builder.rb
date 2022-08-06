@@ -83,6 +83,48 @@ class ImageReq    ## (Generate) Image Request
   end
 
 
+  def self.build_yeoldepunk( params )
+    puts "==> image request params:"
+    pp params
+
+      name = 'yeoldepunk'
+      archetype = _norm_key( params[:t] || 'male 3' )
+
+      hair       = _norm_key( params[:hair] || 'none' )
+      beard      = _norm_key( params[:beard] || 'none' )
+      eyes       = _norm_key( params[:eyes] || 'none' )
+      eyewear    = _norm_key( params[:eyewear] || 'none' )
+      blemish    = _norm_key( params[:blemish] || 'none' )
+      nose       = _norm_key( params[:nose] || 'none' )
+      mouth      = _norm_key( params[:mouth] || 'none' )
+      mouthprop  = _norm_key( params[:mouthprop] || 'none' )
+      earring    = _norm_key( params[:earring] || 'none' )
+      headwear   = _norm_key( params[:headwear] || 'none' )
+      neck       = _norm_key( params[:neck] || 'none' )
+
+      zoom       = _parse_zoom( params[:z] || '1' )
+      background = _norm_key( params[:bg] || 'none' )
+
+      attributes = [archetype]
+      attributes << hair       if hair != 'none'
+      attributes << blemish    if blemish != 'none'
+      attributes << beard      if beard != 'none'
+      attributes << eyes       if eyes != 'none'
+      attributes << eyewear    if eyewear != 'none'
+      attributes << nose       if nose != 'none'
+      attributes << mouth      if mouth  != 'none'
+      attributes << mouthprop  if mouthprop != 'none'
+      attributes << earring    if earring  != 'none'
+      attributes << headwear   if headwear != 'none'
+      attributes << neck       if neck != 'none'
+
+      new( name: name,
+           attributes:  attributes,
+           zoom: zoom,
+           background: background )
+  end
+
+
 
   attr_reader :name,
               :attributes,

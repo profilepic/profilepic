@@ -15,6 +15,7 @@ TXT
 options.each_with_index do |option,i|
 
   value = option.downcase
+  value = value.sub( '(m)', '' ).sub( '(f)', '' ).sub( '(m/f)', '' ).sub( '¹', '' )
   label = option
 
 buf += <<TXT
@@ -29,6 +30,148 @@ end
 buf += "</fieldset>\n"
 buf
 end
+
+
+YEOLDEPUNK_ARCHETYPE = [
+  'Male 1',
+  'Male 2',
+  'Male 3',
+  'Male 4',
+  'Female 1',
+  'Female 2',
+  'Female 3',
+  'Female 4',
+  'Zombie',
+  'Ape',
+  'Alien',
+]
+
+
+YEOLDEPUNK_HAIR = [
+  'Shaved Head (m)',
+  'Peak Spike (m)',
+  'Vampire Hair (m)',
+  'Purple Hair (m)',
+
+  'Mohawk (m/f)',
+  'Mohawk Dark (m/f)',
+  'Mohawk Thin (m/f)',
+  'Wild Hair (m/f)',
+  'Crazy Hair (m/f)',
+  'Messy Hair (m/f)',
+  'Frumpy Hair (m/f)',
+  'Stringy Hair (m/f)',
+  'Clown Hair Green (m/f)',
+
+  'Straight Hair (f)',
+  'Straight Hair Dark (f)',
+  'Straight Hair Blonde (f)',
+  'Blonde Short (f)',
+  'Blonde Bob (f)',
+  'Wild Blonde (f)',
+  'Wild White Hair (f)',
+  'Orange Side (f)',
+  'Dark Hair (f)',
+  'Pigtails (f)',
+  'Pink With Hat¹ (f)',
+  'Half Shaved (f)',
+  'Red Mohawk (f)',
+]
+
+YEOLDEPUNK_BEARD = [
+  'Shadow Beard (m)',
+  'Normal Beard (m)',
+  'Normal Beard Black (m)',
+  'Big Beard (m)',
+  'Luxurious Beard (m)',
+  'Mustache (m)',
+  'Goat (m)',
+  'Handlebars (m)',
+  'Front Beard (m)',
+  'Front Beard Dark (m)',
+  'Chinstrap (m)',
+  'Muttonchops (m)',
+]
+
+YEOLDEPUNK_EYEWEAR = [
+  'Small Shades (m)',
+  'Regular Shades (m/f)',
+  'Classic Shades (m/f)',
+  'Big Shades (m/f)',
+  'Nerd Glasses (m/f)',
+  'Horned Rim Glasses (m/f)',
+  '3D Glasses (m/f)',
+  'VR (m/f)',
+  'Eye Mask (m/f)',
+  'Eye Patch (m/f)',
+  'Welding Goggles (f)',
+]
+
+YEOLDEPUNK_EARRING = [
+  'Earring (m/f)'
+]
+
+
+YEOLDEPUNK_HEADWEAR = [
+  'Cowboy Hat (m)',
+  'Fedora (m)',
+  'Hoodie (m)',
+  'Beanie (m)',
+  'Top Hat (m)',
+  'Do-rag (m)',
+  'Police Cap (m)',
+  'Cap Forward (m)',
+  'Cap (m/f)',
+  'Knitted Cap (m/f)',
+  'Bandana (m/f)',
+  'Headband¹ (m/f)',
+  'Pilot Helmet (f)',
+  'Tassle Hat (f)',
+  'Tiara (f)',
+]
+
+YEOLDEPUNK_EYES = [
+  'Clown Eyes Green (m/f)',
+  'Clown Eyes Blue (m/f)',
+  'Green Eye Shadow (f)',
+  'Blue Eye Shadow (f)',
+  'Purple Eye Shadow (f)',
+]
+
+YEOLDEPUNK_MOUTH = [
+ 'Smile (m)',
+ 'Frown (m)',
+ 'Buck Teeth (m)',
+ 'Hot Lipstick (f)',
+ 'Black Lipstick (f)',
+ 'Purple Lipstick (f)',
+]
+
+
+YEOLDEPUNK_MOUTH_PROP = [
+ 'Cigarette (m/f)',
+ 'Vape (m/f)',
+ 'Pipe (m/f)',
+ 'Medical Mask (m/f)',
+]
+
+YEOLDEPUNK_NECK = [
+  'Silver Chain (m/f)',
+  'Gold Chain (m/f)',
+  'Choker (f)',
+]
+
+YEOLDEPUNK_BLEMISH = [
+  'Mole (m/f)',
+  'Spots (m/f)',
+  'Rosy Cheeks (m/f)',
+]
+
+YEOLDEPUNK_NOSE = [
+  'Clown Nose (m/f)',
+]
+
+
 
 
 DOGE_ARCHETYPE = [
@@ -227,6 +370,12 @@ HTML
     erb :doge
   end
 
+  get '/yeoldepunks' do
+    erb :yeoldepunks
+  end
+
+
+
 
   get '/generate_marcs' do
 
@@ -237,6 +386,17 @@ HTML
    blob = img.image.to_blob
    IMAGES[ r.image_key ] = blob
    redirect "/#{r.image_key}.png"
+ end
+
+ get '/generate_yeoldepunks' do
+
+  r = ImageReq.build_yeoldepunk( params )
+
+  img = r.image
+
+  blob = img.image.to_blob
+  IMAGES[ r.image_key ] = blob
+  redirect "/#{r.image_key}.png"
  end
 
 
