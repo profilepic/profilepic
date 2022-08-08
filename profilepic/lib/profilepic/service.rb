@@ -3,6 +3,62 @@
 # helpers
 #  to generate
 
+def radio_options_w_sprites( options,
+                      name:,
+                      legend: )
+
+  buf = <<TXT
+<fieldset>
+    <legend>#{legend}:</legend>
+TXT
+
+options.each_with_index do |option,i|
+
+  value = option.downcase
+
+  ## auto-extract qualifiers e.g. (m)ale/(f)emale
+  qualifiers = if    value.index( '(m)' )   then ['m']
+               elsif value.index( '(f)' )   then ['f']
+               elsif value.index( '(m/f)' ) then ['m', 'f']
+               else  []
+               end
+
+  value = value.sub( '(m)', '' ).sub( '(f)', '' ).sub( '(m/f)', '' ).sub( '¹', '' )
+  value = value.strip
+
+
+
+  label = option
+
+buf += <<TXT
+<div>
+  <input type="radio" id="#{name}#{i}" name="#{name}" value="#{value}"
+            #{ i==0 ? 'checked' : '' }>
+TXT
+
+if ['none'].include?( value )
+   ## do nothing  - no sprite(s) - for none & friends
+elsif qualifiers.empty?
+  buf +=  %Q[    <span class="sprite" data-name="#{value}"></span>\n]
+else
+  qualifiers.each do |qualifier|
+    buf +=  %Q[    <span class="sprite" data-name="#{value} (#{qualifier})"></span>\n]
+  end
+end
+
+buf += <<TXT
+       <label for="#{name}#{i}">#{label}</label>
+</div>
+TXT
+end
+
+
+buf += "</fieldset>\n"
+buf
+
+end
+
+
 def radio_options( options,
                      name:,
                      legend: )
@@ -16,12 +72,14 @@ options.each_with_index do |option,i|
 
   value = option.downcase
   value = value.sub( '(m)', '' ).sub( '(f)', '' ).sub( '(m/f)', '' ).sub( '¹', '' )
+  value = value.strip
+
   label = option
 
 buf += <<TXT
 <div>
   <input type="radio" id="#{name}#{i}" name="#{name}" value="#{value}"
-            #{ i==0 ? 'checked' : '' }
+            #{ i==0 ? 'checked' : '' }>
        <label for="#{name}#{i}">#{label}</label>
 </div>
 TXT

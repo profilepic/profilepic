@@ -16,65 +16,65 @@ own 100% forever.
 <form action="/generate_yeoldepunks" method="get" id="form1">
 
 
-<%= radio_options( YEOLDEPUNK_ARCHETYPE,
+<%= radio_options_w_sprites( YEOLDEPUNK_ARCHETYPE,
                    name: 't',
                    legend: "Select a ye olde' punk  base (archetype)" ) %>
 
 Options:
 
-<%= radio_options( ['None']+YEOLDEPUNK_HAIR,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_HAIR,
                    name: 'hair',
                    legend: 'Select hair' ) %>
 
 ¹: Note: Pink With Hat is a hair+headwear combo.
 
-<%= radio_options( ['None']+YEOLDEPUNK_BEARD,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_BEARD,
                    name: 'beard',
                    legend: 'Select beard' ) %>
 
-<%= radio_options( ['None']+YEOLDEPUNK_EYES,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_EYES,
                    name: 'eyes',
                    legend: 'Select eyes (make-up)' ) %>
 
 
 
-<%= radio_options( ['None']+YEOLDEPUNK_EYEWEAR,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_EYEWEAR,
                    name: 'eyewear',
                    legend: 'Select eyewear' ) %>
 
 
-<%= radio_options( ['None']+YEOLDEPUNK_NOSE,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_NOSE,
                    name: 'nose',
                    legend: 'Select nose accessory' ) %>
 
-<%= radio_options( ['None']+YEOLDEPUNK_BLEMISH,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_BLEMISH,
                    name: 'blemish',
                    legend: 'Select blemish' ) %>
 
 
-<%= radio_options( ['None']+YEOLDEPUNK_MOUTH,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_MOUTH,
                    name: 'mouth',
                    legend: 'Select mouth expression / lipstick make-up' ) %>
 
 
-<%= radio_options( ['None']+YEOLDEPUNK_MOUTH_PROP,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_MOUTH_PROP,
                    name: 'mouthprop',
                    legend: 'Select mouth prop' ) %>
 
 
-<%= radio_options( ['None']+YEOLDEPUNK_EARRING,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_EARRING,
                    name: 'earring',
                    legend: 'Select earring' ) %>
 
 
-<%= radio_options( ['None']+YEOLDEPUNK_HEADWEAR,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_HEADWEAR,
                    name: 'headwear',
                    legend: 'Select headwear' ) %>
 
 ¹: Note: Headband (f) is a (black) hair+headwear combo.
 
 
-<%= radio_options( ['None']+YEOLDEPUNK_NECK,
+<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_NECK,
                    name: 'neck',
                    legend: 'Select neck accessory' ) %>
 
@@ -89,3 +89,143 @@ Options:
 <%= erb :'shared/_more_options' %>
 
 </form>
+
+
+
+<script>
+var sheet = Spritesheet.read( 'yeoldepunks-24x24.png',
+`0, Male 1
+1, Male 2
+2, Male 3
+3, Male 4
+4, Female 1
+5, Female 2
+6, Female 3
+7, Female 4
+8, Zombie
+9, Ape
+10, Alien
+11, Rosy Cheeks (m)
+12, Luxurious Beard (m)
+13, Clown Hair Green (m)
+14, Mohawk Dark (m)
+15, Cowboy Hat (m)
+16, Mustache (m)
+17, Clown Nose (m)
+18, Cigarette (m)
+19, Nerd Glasses (m)
+20, Regular Shades (m)
+21, Knitted Cap (m)
+22, Shadow Beard (m)
+23, Frown (m)
+24, Cap Forward (m)
+25, Goat (m)
+26, Mole (m)
+27, Purple Hair (m)
+28, Small Shades (m)
+29, Shaved Head (m)
+30, Classic Shades (m)
+31, Vape (m)
+32, Silver Chain (m)
+33, Smile (m)
+34, Big Shades (m)
+35, Mohawk Thin (m)
+36, Beanie (m)
+37, Cap (m)
+38, Clown Eyes Green (m)
+39, Normal Beard Black (m)
+40, Medical Mask (m)
+41, Normal Beard (m)
+42, VR (m)
+43, Eye Patch (m)
+44, Wild Hair (m)
+45, Top Hat (m)
+46, Bandana (m)
+47, Handlebars (m)
+48, Frumpy Hair (m)
+49, Crazy Hair (m)
+50, Police Cap (m)
+51, Buck Teeth (m)
+52, Do-rag (m)
+53, Front Beard (m)
+54, Spots (m)
+55, Big Beard (m)
+56, Vampire Hair (m)
+57, Peak Spike (m)
+58, Chinstrap (m)
+59, Fedora (m)
+60, Earring (m)
+61, Horned Rim Glasses (m)
+62, Headband (m)
+63, Pipe (m)
+64, Messy Hair (m)
+65, Front Beard Dark (m)
+66, Hoodie (m)
+67, Gold Chain (m)
+68, Muttonchops (m)
+69, Stringy Hair (m)
+70, Eye Mask (m)
+71, 3D Glasses (m)
+72, Clown Eyes Blue (m)
+73, Mohawk (m)
+74, Pilot Helmet (f)
+75, Tassle Hat (f)
+76, Hot Lipstick (f)
+77, Blue Eye Shadow (f)
+78, Straight Hair Dark (f)
+79, Choker (f)
+80, Crazy Hair (f)
+81, Regular Shades (f)
+82, Wild Blonde (f)
+83, 3D Glasses (f)
+84, Mole (f)
+85, Wild White Hair (f)
+86, Spots (f)
+87, Frumpy Hair (f)
+88, Nerd Glasses (f)
+89, Tiara (f)
+90, Orange Side (f)
+91, Red Mohawk (f)
+92, Messy Hair (f)
+93, Clown Eyes Blue (f)
+94, Pipe (f)
+95, Wild Hair (f)
+96, Purple Eye Shadow (f)
+97, Stringy Hair (f)
+98, Dark Hair (f)
+99, Eye Patch (f)
+100, Blonde Short (f)
+101, Classic Shades (f)
+102, Eye Mask (f)
+103, Clown Hair Green (f)
+104, Cap (f)
+105, Medical Mask (f)
+106, Bandana (f)
+107, Purple Lipstick (f)
+108, Clown Nose (f)
+109, Headband (f)
+110, Pigtails (f)
+111, Straight Hair Blonde (f)
+112, Knitted Cap (f)
+113, Clown Eyes Green (f)
+114, Cigarette (f)
+115, Welding Goggles (f)
+116, Mohawk Thin (f)
+117, Gold Chain (f)
+118, VR (f)
+119, Vape (f)
+120, Pink With Hat (f)
+121, Blonde Bob (f)
+122, Mohawk (f)
+123, Big Shades (f)
+124, Earring (f)
+125, Green Eye Shadow (f)
+126, Straight Hair (f)
+127, Rosy Cheeks (f)
+128, Half Shaved (f)
+129, Mohawk Dark (f)
+130, Black Lipstick (f)
+131, Horned Rim Glasses (f)
+132, Silver Chain (f)` );
+sheet.draw();
+</script>

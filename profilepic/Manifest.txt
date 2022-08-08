@@ -5,7 +5,14 @@ Rakefile
 bin/profilepic
 lib/profilepic.rb
 lib/profilepic/builder.rb
+lib/profilepic/public/doge-24x24.csv
+lib/profilepic/public/doge-24x24.png
+lib/profilepic/public/marcs-24x24.csv
+lib/profilepic/public/marcs-24x24.png
+lib/profilepic/public/spritesheet.js
 lib/profilepic/public/style.css
+lib/profilepic/public/yeoldepunks-24x24.csv
+lib/profilepic/public/yeoldepunks-24x24.png
 lib/profilepic/service.rb
 lib/profilepic/version.rb
 lib/profilepic/views/doge.erb

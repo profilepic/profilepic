@@ -16,22 +16,22 @@ own 100% forever.
 <form action="/generate_doge" method="get" id="form1">
 
 
-<%= radio_options( DOGE_ARCHETYPE,
+<%= radio_options_w_sprites( DOGE_ARCHETYPE,
                    name: 't',
                    legend: 'Select a doge shiba inu base (archetype)' ) %>
 
 Options:
 
-<%= radio_options( ['None']+DOGE_HAIR,
+<%= radio_options_w_sprites( ['None']+DOGE_HAIR,
                    name: 'hair',
                    legend: 'Select hair' ) %>
 
-<%= radio_options( ['None']+DOGE_HEADWEAR,
+<%= radio_options_w_sprites( ['None']+DOGE_HEADWEAR,
                    name: 'headwear',
                    legend: 'Select headwear' ) %>
 
 
-<%= radio_options( ['None']+DOGE_EYEWEAR,
+<%= radio_options_w_sprites( ['None']+DOGE_EYEWEAR,
                    name: 'eyewear',
                    legend: 'Select eyewear' ) %>
 
@@ -41,30 +41,34 @@ Options:
 </div>
 
 
-
-Or
-
-<fieldset>
-    <legend>Type (more) attribute description / specification:</legend>
-
-<div>
-<input type="text" id="attributes" name="attributes"
-       minlength="0" maxlength="200" size="80"
-       style="font-size: 200%;"
-       placeholder="Attribute 1, Attribute 2, Attribute 3, ...">
-
-<p>
-  Examples:
-</p>
-  <ul>
-    <li>Crazy Hair, 3D Glasses</li>
-    <li>Headband</li>
-  </ul>
-
-</div>
-   </fieldset>
-
-
 <%= erb :'shared/_more_options' %>
 
 </form>
+
+
+<script>
+var sheet = Spritesheet.read( 'doge-24x24.png',
+`0, classic
+1, dark
+2, zombie
+3, alien
+4, crazyhair
+5, beanie
+6, cap
+7, capforward
+8, cowboyhat
+9, fedora
+10, knittedcap
+11, tophat
+12, bandana
+13, headband
+14, tiara
+15, 3dglasses
+16, bigshades
+17, classicshades
+18, regularshades
+19, smallshades
+20, nerdglasses
+21, eyepatch` );
+sheet.draw();
+</script>
