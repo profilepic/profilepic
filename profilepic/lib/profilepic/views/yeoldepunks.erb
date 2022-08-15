@@ -15,69 +15,7 @@ own 100% forever.
 
 <form action="/generate_yeoldepunks" method="get" id="form1">
 
-
-<%= radio_options_w_sprites( YEOLDEPUNK_ARCHETYPE,
-                   name: 't',
-                   legend: "Select a ye olde' punk  base (archetype)" ) %>
-
-Options:
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_HAIR,
-                   name: 'hair',
-                   legend: 'Select hair' ) %>
-
-¹: Note: Pink With Hat is a hair+headwear combo.
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_BEARD,
-                   name: 'beard',
-                   legend: 'Select beard' ) %>
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_EYES,
-                   name: 'eyes',
-                   legend: 'Select eyes (make-up)' ) %>
-
-
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_EYEWEAR,
-                   name: 'eyewear',
-                   legend: 'Select eyewear' ) %>
-
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_NOSE,
-                   name: 'nose',
-                   legend: 'Select nose accessory' ) %>
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_BLEMISH,
-                   name: 'blemish',
-                   legend: 'Select blemish' ) %>
-
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_MOUTH,
-                   name: 'mouth',
-                   legend: 'Select mouth expression / lipstick make-up' ) %>
-
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_MOUTH_PROP,
-                   name: 'mouthprop',
-                   legend: 'Select mouth prop' ) %>
-
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_EARRING,
-                   name: 'earring',
-                   legend: 'Select earring' ) %>
-
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_HEADWEAR,
-                   name: 'headwear',
-                   legend: 'Select headwear' ) %>
-
-¹: Note: Headband (f) is a (black) hair+headwear combo.
-
-
-<%= radio_options_w_sprites( ['None']+YEOLDEPUNK_NECK,
-                   name: 'neck',
-                   legend: 'Select neck accessory' ) %>
-
+<%= render_options( YEOLDEPUNK ) %>
 
 <div>
    <button type="submit" form="form1" value="Submit"

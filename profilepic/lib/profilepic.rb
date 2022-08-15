@@ -7,9 +7,13 @@ require 'webrick'
 
 
 ## our own code
-require 'profilepic/version'    # note: let version always go first
-require 'profilepic/builder'
-require 'profilepic/service'
+require_relative 'profilepic/version'    # note: let version always go first
+require_relative 'profilepic/builder'
+require_relative 'profilepic/helper'
+
+require_relative 'profilepic/yeoldepunks'
+require_relative 'profilepic/doge'
+require_relative 'profilepic/service'
 
 
 

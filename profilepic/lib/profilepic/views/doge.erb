@@ -15,25 +15,7 @@ own 100% forever.
 
 <form action="/generate_doge" method="get" id="form1">
 
-
-<%= radio_options_w_sprites( DOGE_ARCHETYPE,
-                   name: 't',
-                   legend: 'Select a doge shiba inu base (archetype)' ) %>
-
-Options:
-
-<%= radio_options_w_sprites( ['None']+DOGE_HAIR,
-                   name: 'hair',
-                   legend: 'Select hair' ) %>
-
-<%= radio_options_w_sprites( ['None']+DOGE_HEADWEAR,
-                   name: 'headwear',
-                   legend: 'Select headwear' ) %>
-
-
-<%= radio_options_w_sprites( ['None']+DOGE_EYEWEAR,
-                   name: 'eyewear',
-                   legend: 'Select eyewear' ) %>
+<%= render_options( DOGE ) %>
 
 <div>
    <button type="submit" form="form1" value="Submit"
