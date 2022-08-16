@@ -1,0 +1,84 @@
+<p style="font-size: 80%;">
+    <a href="/">« Profile Pic(ture) As A Service</a>
+</p>
+
+
+<h1>Right-Click &amp; Save</h1>
+
+
+<p>Yes, you can!
+Right-click and save your own original that you
+own 100% forever.
+</p>
+
+
+<img src='<%= "/#{pic}" %>'>
+
+
+
+<form action="/more" method="get" id="form1">
+
+<input type="hidden"  name="key" value="<%= params[:key] %>">
+
+
+<p>More options:</p>
+
+<fieldset>
+    <legend>Select a zoom size:</legend>
+
+    <div>
+      <input type="radio" id="z1" name="z" value="1"
+             <%= zoom==1 ? 'checked' : '' %>>
+      <label for="z1">1X</label>
+    </div>
+
+    <div>
+      <input type="radio" id="z2" name="z" value="2"
+            <%= zoom==2 ? 'checked' : '' %>>
+      <label for="z2">2X</label>
+    </div>
+
+    <div>
+      <input type="radio" id="z4" name="z" value="4"
+            <%= zoom==4 ? 'checked' : '' %>>
+      <label for="z4">4X</label>
+    </div>
+
+    <div>
+      <input type="radio" id="z8" name="z" value="8"
+             <%= zoom==8 ? 'checked' : '' %>>
+      <label for="z8">8X</label>
+    </div>
+</fieldset>
+
+
+<fieldset>
+    <legend>Select a background:</legend>
+
+    <div>
+      <input type="radio" id="bg1" name="bg" value="none"
+             <%= bg=='none' ? 'checked': '' %>>
+      <label for="bg1">None (Transparent)</label>
+    </div>
+
+    <div>
+      <input type="radio" id="bg2" name="bg" value="ukraine"
+            <%= bg=='ukraine' ? 'checked': '' %>>
+      <label for="bg2">We Stand With Ukraine</label>
+    </div>
+
+    <div>
+      <input type="radio" id="bg3" name="bg" value="rainbow"
+            <%= bg=='rainbow' ? 'checked': '' %>>
+      <label for="bg3">Pride / Rainbow</label>
+    </div>
+</fieldset>
+
+
+
+<div>
+   <button type="submit" form="form1" value="Submit"
+      style="font-size: 400%; color: white; background-color: blue;">Update Profile Pic(ture) in .PNG Format</button>
+</div>
+
+</form>

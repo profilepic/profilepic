@@ -14,7 +14,7 @@ body {
  }
 
 
- fieldset div {
+ fieldset div.columns {
   display: inline-block;
   width: 240px;
 }

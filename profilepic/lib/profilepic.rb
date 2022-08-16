@@ -11,8 +11,9 @@ require_relative 'profilepic/version'    # note: let version always go first
 require_relative 'profilepic/builder'
 require_relative 'profilepic/helper'
 
-require_relative 'profilepic/yeoldepunks'
-require_relative 'profilepic/doge'
+require_relative 'profilepic/config/yeoldepunks'
+require_relative 'profilepic/config/marcs'
+require_relative 'profilepic/config/doge'
 require_relative 'profilepic/service'
 
 

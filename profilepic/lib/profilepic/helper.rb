@@ -81,7 +81,8 @@ options.each_with_index do |option,i|
   id    = "#{name}#{i}"    ## use for input (dom) id / label for [id]
 
 
-buf += "<div>\n"
+  ## note. add class columns - via css turns div into 250px inline-blocks
+buf += "<div class='columns'>\n"
 buf +=  radio_button_tag( name, value,
                           id: id,
                           checked: i==0  )

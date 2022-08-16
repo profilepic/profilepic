@@ -1,140 +1,5 @@
 
 
-
-
-
-MARC_ARCHETYPE = [
- 'Marc',
- 'Marc Mid',
- 'Marc Dark',
- 'Marc Albino',
- 'Marc Golden',
- 'Mad Lad',
- 'Zombie',
- 'Ape',
- 'Ape Golden',
- 'Ape Pink',
- 'Alien',
- 'Alien Green',
- 'Devil',
- 'Orc',
- 'Skeleton',
- 'Bot']
-
-
-MARC_EYES = [
-  'Blue Eyes',
-  'Green Eyes',
-]
-
-MARC_FACE = [
-  'Blue Eye Shadow',
-  'Green Eye Shadow',
-  'Purple Eye Shadow',
-  'Clown Eyes Blue',
-  'Clown Eyes Green',
-  'Bagner',
-  'Marc Tyson',
-  'Tears',
-]
-
-MARC_BEARD = [
-  'Big Beard White',
-  'Big Beard',
-  'Chinstrap',
-  'Front Beard',
-  'Front Beard Dark',
-  'Full Mustache',
-  'Full Mustache Dark',
-  'Goat',
-  'Goat Dark',
-  'Handlebar',
-  'Luxurious Beard',
-  'Mustache',
-  'Mutton Chop',
-  'Normal Beard',
-  'Normal Beard Black',
-  'Shadow Beard',
-  'Soul Patch',
-]
-
-MARC_HAIR = [
-  'Blonde Bob',
-  'Chad',
-  'Clown Hair',
-  'Crazy White Hair',
-  'Crazy Hair',
-  'Frumpy Hair',
-  'Marc Three',
-  'Purple Hair',
-  'Stringy Hair',
-  'Vampire Hair',
-  'Wild Blonde Hair',
-  'Wild Hair',
-]
-
-MARC_HEADWEAR = [
-  'Bandana',
-  'Beanie',
-  'Bunny Ears',
-  'Cap',
-  'Skull Cap',
-  'Cap Forward',
-  'Police Cap',
-  'Cowboy Hat',
-  'Do Rag',
-  'Fast Food',
-  'Marcdonalds',
-  'Fedora',
-  'Headband',
-  'Roaring Headband',
-  'Hoodie',
-  'Purple Hoodie',
-  'Knitted Cap',
-  'Laurels',
-  'Shemagh',
-  'Tassle Hat',
-  'Tiarra',
-  'Top Hat',
-  'Uncle Sam',
-  'Viking',
-  'Welding Goggles',
-]
-
-
-MARC_EYEWEAR = [
-  '3D Glasses',
-  'Aviators',
-  'Big Shades',
-  'Classic Shades',
-  'Deal With It',
-  'Glasses',
-  'Gold Glasses',
-  'Horned-Rim Glasses',
-  'Monocle',
-  'Nerd Glasses',
-  'Pink Shades',
-  'Polarized',
-  'Polarized White',
-  'Regular Shades',
-  'Small Shades',
-  'VR Headset',
-  'Eye Mask',
-  'Eye Patch',
-  'Lasers']
-
-MARC_MOUTH_PROP = [
-  'Cigar',
-  'Cigarette',
-  'Hookah',
-  'Pipe',
-  'Vape',
-  'Medical Mask',
-  'Bubble Gum' ]
-
-
-
-
 class ProfilepicService < Sinatra::Base
 
   get '/cache' do
@@ -201,7 +66,9 @@ HTML
 
  blob = img.image.to_blob
  IMAGES[ r.image_key ] = blob
- redirect "/#{r.image_key}.png"
+
+  ##redirect "/#{r.image_key}.png"
+  redirect "/more?key=#{r.image_key}"
 end
 
 
@@ -213,18 +80,57 @@ end
 
     blob = img.image.to_blob
     IMAGES[ r.image_key ] = blob
-    redirect "/#{r.image_key}.png"
+
+    # redirect "/#{r.image_key}.png"
+    redirect "/more?key=#{r.image_key}"
   end
 
 
-  get '/:key.png' do
+
+
+  get '/more' do
+
+    zoom = (params[:z] || '1').strip.to_i( 10 )
+
+    ## change/rename pic to src (or image_src or such - why? why not?)
+    pic = "#{params[:key]}"
+    pic += "@#{zoom}x"   if [2,3,4,5,6,7,8,9,10,20].include?( zoom )
+    pic += ".png"
+
+    bg = (params[:bg] || 'none').strip.downcase
+
+    pic += "?bg=#{bg}"   if bg != 'none'
+
+
+    erb :more, locals: { pic: pic,
+                         zoom: zoom,
+                         bg: bg }
+  end
+
+
+  get  %r{/(?<key>[a-z0-9]+)
+             (@(?<zoom>[0-9]+)x)?
+             \.png}xi   do
+
+   # get '/:key(@:zoom)?.png' do
     puts "  .png image request for key: >#{params[:key]}<"
+    puts "        with zoom: >#{params[:zoom]}< : #{params[:zoom].class.name}"
 
     blob = IMAGES[ params[:key] ]
 
+
     if blob
+      img_inner = ChunkyPNG::Image.from_blob( blob )
+      img = Pixelart::Image.new( img_inner.width, img_inner.height, img_inner )
+
+      bg = (params[:bg] || 'none').strip.downcase
+      img = img.background( bg )   if bg != 'none'
+
+      zoom = (params[:zoom] || '1').strip.to_i( 10 )
+      img = img.zoom( zoom )  if [2,3,4,5,6,7,8,9,10,20].include?( zoom )
+
       headers( 'Content-Type' => "image/png" )
-      blob
+      img.image.to_blob
     else
         "404 not found; sorry no generated .png image found for key >#{params[:key]}<"
     end

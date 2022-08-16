@@ -27,31 +27,13 @@ class ImageReq    ## (Generate) Image Request
     pp params
 
       name = 'marc'
-      archetype = _norm_key( params[:t] || 'marc' )
-      more_attributes = _parse_attributes( params[:attributes] || '' )
-
-      eyes     = _norm_key( params[:eyes] || 'none' )
-      face     = _norm_key( params[:face] || 'none' )
-      beard     = _norm_key( params[:beard] || 'none' )
-      hair      = _norm_key( params[:hair] || 'none' )
-      headwear  = _norm_key( params[:headwear] || 'none' )
-      eyewear  = _norm_key( params[:eyewear] || 'none' )
-      mouth    = _norm_key( params[:mouth] || 'none' )
+      attributes = _build_attributes( params, MARC )
 
       zoom       = _parse_zoom( params[:z] || '1' )
       background = _norm_key( params[:bg] || 'none' )
 
-      attributes = [archetype]
-      attributes << eyes       if eyes != 'none'
-      attributes << face       if face != 'none'
-      attributes << hair       if hair != 'none'
-      attributes << beard      if beard != 'none'
-      attributes << headwear    if headwear != 'none'
-      attributes << eyewear    if eyewear != 'none'
-      attributes << mouth      if mouth != 'none'
-
       new( name: name,
-           attributes:  attributes + more_attributes,
+           attributes:  attributes,
            zoom: zoom,
            background: background )
   end
@@ -136,7 +118,7 @@ def self._build_attributes( params, spec )
     value = params[name]
 
     if value.nil? || value.empty?
-      reqired = h[:none] == true   ## check if value is required or optional
+      required =  h[:none] == true   ## check if value is required or optional
       if required
          raise ArgumentError, "required attribute/param >#{name}< missing"
       else
