@@ -8,10 +8,19 @@
 
 
 
+##  (Command-Line Tool) Usage
 
-##  Usage
+The gem includes a command line tool named - surprise, surpirse - `profilepic`
+that lets you run a zero-config / out-of-the-box profile pic(ture) as a service.  Type:
 
-...
+    $ profilepic
+
+That will start-up a (local loopback) web server / service running on port 3000.  
+Open-up up the index page in your browser to get started e.g. <http://localhost:3000/>. 
+
+That's it. 
+
+
 
 
 
