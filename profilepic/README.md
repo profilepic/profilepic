@@ -10,7 +10,7 @@
 
 ##  (Command-Line Tool) Usage
 
-The gem includes a command line tool named - surprise, surpirse - `profilepic`
+The package includes a command line tool named - surprise, surpirse - `profilepic`
 that lets you run a zero-config / out-of-the-box profile pic(ture) as a service.  Type:
 
     $ profilepic
