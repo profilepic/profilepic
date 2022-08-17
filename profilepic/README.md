@@ -25,6 +25,30 @@ That's it.
 
 
 
+## Usage in Your (Web) Apps
+
+Yes, you can. The [`ProfilepicService` class](lib/profilepic/service.rb) is a "plain-vanilla" rack (web) app  (powered by the [sinatra gem / library](https://github.com/sinatra/sinatra)). To run the app "standalone" use:
+
+``` ruby
+require 'profilepic'
+
+# start-up the ProfilepicService (rack) app, that is, the profile pic(ure) as a service,
+#   using the WEBrick server running on port 3000 using the local loopback host e.g. 127.0.0.1     
+Rack::Handler::WEBrick.run ProfilepicService, :Port => 3000, :Host => '127.0.0.1'
+```
+
+Or mount the rack (web) app in your own scripts or web framework of choice.
+
+
+
+## Install
+
+Just install the gem:
+
+    $ gem install profilepic
+
+
+
 ## License
 
 The scripts are dedicated to the public domain.
