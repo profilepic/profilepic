@@ -25,7 +25,7 @@ That's it.
 
 
 
-## Usage in Your (Web) Apps
+## Usage in Your Scripts And/Or (Web) Apps
 
 Yes, you can. The [`ProfilepicService` class](lib/profilepic/service.rb) is a "plain-vanilla" rack (web) app  (powered by the [sinatra gem / library](https://github.com/sinatra/sinatra)). To run the app "standalone" use:
 
@@ -37,7 +37,7 @@ require 'profilepic'
 Rack::Handler::WEBrick.run ProfilepicService, :Port => 3000, :Host => '127.0.0.1'
 ```
 
-Or mount the rack (web) app in your own scripts or web framework of choice.
+Or mount the rack (web) app in your own scripts or web framework/library of choice.
 
 
 
