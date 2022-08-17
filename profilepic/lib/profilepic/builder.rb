@@ -13,13 +13,8 @@ class ImageReq    ## (Generate) Image Request
      name       = _norm_key( params[:t] || 'punk'  )
      attributes = _parse_attributes( params[:attributes] || '' )
 
-     zoom       = _parse_zoom( params[:z] || '1' )
-     background = _norm_key( params[:bg] || 'none' )
-
       new( name: name,
-           attributes: attributes,
-           zoom: zoom,
-           background: background )
+           attributes: attributes )
   end
 
   def self.build_marc( params )
@@ -29,13 +24,8 @@ class ImageReq    ## (Generate) Image Request
       name = 'marc'
       attributes = _build_attributes( params, MARC )
 
-      zoom       = _parse_zoom( params[:z] || '1' )
-      background = _norm_key( params[:bg] || 'none' )
-
       new( name: name,
-           attributes:  attributes,
-           zoom: zoom,
-           background: background )
+           attributes:  attributes )
   end
 
   def self.build_doge( params )
@@ -46,14 +36,8 @@ class ImageReq    ## (Generate) Image Request
 
       attributes = _build_attributes( params, DOGE )
 
-      zoom       = _parse_zoom( params[:z] || '1' )
-      background = _norm_key( params[:bg] || 'none' )
-
-
       new( name: name,
-           attributes:  attributes,
-           zoom: zoom,
-           background: background )
+           attributes:  attributes )
   end
 
 
@@ -65,43 +49,34 @@ class ImageReq    ## (Generate) Image Request
 
       attributes = _build_attributes( params, YEOLDEPUNK )
 
-      zoom       = _parse_zoom( params[:z] || '1' )
-      background = _norm_key( params[:bg] || 'none' )
-
       new( name: name,
-           attributes:  attributes,
-           zoom: zoom,
-           background: background )
+           attributes:  attributes )
   end
 
 
 
   attr_reader :name,
-              :attributes,
-              :zoom,
-              :background
-  def initialize( name:, attributes:, zoom:, background: )
+              :attributes
+  def initialize( name:, attributes: )
      @name       = name
      @attributes = attributes
-     @zoom       = zoom
-     @background = background
   end
 
   def image
-    img = Original::Image.fabricate( @name, *@attributes )
-    img = img.background( @background )   if @background != 'none'
-    img = img.zoom( @zoom )  if [2,3,4,5,6,7,8,9,10,20].include?( @zoom )
-    img
+    ## check - cache / memoize image - why? why not?
+    Original::Image.fabricate( @name, *@attributes )
   end
 
+  def image_blob() image.to_blob;  end
+  alias_method :blob, :image_blob   ## keep (shortcut) alias - why? why not?
+
   def image_key
-     @key ||= begin
-                key = "#{@name}#{Time.now.to_i}"
-                key << "@#{@zoom}x"   if [2,3,4,5,6,7,8,9,10,20].include?( @zoom )
-                key
-             end
+     @key ||= "#{@name}#{Time.now.to_i}"
      @key
   end
+  alias_method :key, :image_key    ## keep (shortcut) alias - why? why not?
+
+
 
 #####
 #  (static) helpers
@@ -109,7 +84,6 @@ class ImageReq    ## (Generate) Image Request
 def self._norm_key( str )
   str.downcase.strip
 end
-
 
 def self._build_attributes( params, spec )
   attributes = []
@@ -142,9 +116,5 @@ def self._parse_attributes( str )
   attributes
 end
 
-def self._parse_zoom( str )
-  str.strip.to_i( 10 )
-end
-
-end
+end   # class ImageReq - (Generate) Image Request
 

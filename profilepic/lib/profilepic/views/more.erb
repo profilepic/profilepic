@@ -3,25 +3,25 @@
 </p>
 
 
-<h1>Right-Click &amp; Save</h1>
-
-
-<p>Yes, you can!
-Right-click and save your own original that you
-own 100% forever.
-</p>
+<h1><%= name %> No. <%= id %> - Right-Click &amp; Save</h1>
 
 
 <img src='<%= "/#{pic}" %>'>
 
 
+<p>Yes, you can!
+Right-click and save your own <%= name %> original that you
+own 100% forever.
+More options:
+</p>
 
-<form action="/more" method="get" id="form1">
+
+
+
+<form action="/more" method="get">
 
 <input type="hidden"  name="key" value="<%= params[:key] %>">
 
-
-<p>More options:</p>
 
 <fieldset>
     <legend>Select a zoom size:</legend>
@@ -77,8 +77,8 @@ own 100% forever.
 
 
 <div>
-   <button type="submit" form="form1" value="Submit"
-      style="font-size: 400%; color: white; background-color: blue;">Update Profile Pic(ture) in .PNG Format</button>
+   <button type="submit" value="submit"
+        class="bigblue">Update Profile Pic(ture) in .PNG Format</button>
 </div>
 
 </form>

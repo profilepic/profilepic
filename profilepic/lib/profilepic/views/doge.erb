@@ -13,13 +13,13 @@ own 100% forever.
 
 
 
-<form action="/generate_doge" method="get" id="form1">
+<form action="/generate_doge" method="get">
 
 <%= render_options( DOGE ) %>
 
 <div>
-   <button type="submit" form="form1" value="Submit"
-      style="font-size: 400%; color: white; background-color: blue;">Generate Profile Pic(ture) in .PNG Format</button>
+   <button type="submit" value="submit"
+      class="bigblue">Generate Profile Pic(ture) in .PNG Format</button>
 </div>
 
 </form>
@@ -27,27 +27,6 @@ own 100% forever.
 
 <script>
 var sheet = Spritesheet.read( 'doge-24x24.png',
-`0, classic
-1, dark
-2, zombie
-3, alien
-4, crazyhair
-5, beanie
-6, cap
-7, capforward
-8, cowboyhat
-9, fedora
-10, knittedcap
-11, tophat
-12, bandana
-13, headband
-14, tiara
-15, 3dglasses
-16, bigshades
-17, classicshades
-18, regularshades
-19, smallshades
-20, nerdglasses
-21, eyepatch` );
+`<%= spritesheet( 'doge-24x24.csv' ) %>` );
 sheet.draw();
 </script>

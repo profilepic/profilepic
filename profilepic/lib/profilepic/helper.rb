@@ -2,6 +2,52 @@
 # (view) helpers
 
 
+def spritesheet( basename )  ## spritesheet metadata / record helpers
+  path = "#{Profilepic.root}/lib/profilepic/public/#{basename}"
+  recs = read_csv( path )
+
+###
+# id, category, name, more_names
+# 0, , classic,
+# 1, , dark,
+# 2, , zombie,
+
+##
+# id, name, gender, size, type, more_names
+# 0, Male 1, m, l, Archetype,
+# 1, Male 2, m, l, Archetype,
+# 2, Male 3, m, l, Archetype,
+
+
+  buf = String.new('')
+  recs.each do |rec|
+    id         =  rec['id']
+    name       =  rec['name']
+    more_names = (rec['more_names'] || '').split( '|' )
+
+    names = [name]
+    names += more_names
+
+    if rec.has_key?( 'gender' )
+        archetype  = (rec['type'] || rec['category'] || '').downcase.strip == 'archetype'
+        if archetype
+          ## do nothing for base archetype (e.g. male 1, alien, etc.)
+        else
+           ## auto-add qualifer e.g. (m) or (f) via gender
+           gender = (rec['gender'] || 'm').downcase.strip
+           names = names.map { |name| "#{name} (#{gender})"}
+        end
+    end
+
+
+    buf << "#{id}, #{names.join(' | ')}\n"
+  end
+
+  buf
+end
+
+
+
 
 def render_options( spec )
 
