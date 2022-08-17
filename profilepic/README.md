@@ -8,10 +8,10 @@
 
 
 
-##  (Command-Line Tool) Usage
+## Command-Line Tool 
 
-The package includes a command line tool named - surprise, surpirse - `profilepic`
-that lets you run a zero-config / out-of-the-box profile pic(ture) as a service.  Type:
+Use the command line tool named - surprise, surpirse - `profilepic`
+to run a zero-config / out-of-the-box profile pic(ture) as a service.  Type:
 
     $ profilepic
 
