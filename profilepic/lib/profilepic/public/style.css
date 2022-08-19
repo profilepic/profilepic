@@ -20,6 +20,11 @@ body {
   width: 240px;
 }
 
+fieldset {
+  background-color:  floralwhite;
+}
+
+
 button.bigblue {
     font-size: 400%;
     color: white;

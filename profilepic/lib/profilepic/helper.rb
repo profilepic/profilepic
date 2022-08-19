@@ -3,7 +3,8 @@
 
 
 def spritesheet( basename )  ## spritesheet metadata / record helpers
-  path = "#{Profilepic.root}/lib/profilepic/public/#{basename}"
+  ## note: map "virtual name" to local real path
+  path = FILES[ basename ]
   recs = read_csv( path )
 
 ###

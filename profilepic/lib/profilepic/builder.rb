@@ -28,6 +28,19 @@ class ImageReq    ## (Generate) Image Request
            attributes:  attributes )
   end
 
+
+  def self.build_saudi( params )
+    puts "==> image request params:"
+    pp params
+
+      name = 'saudi'
+      attributes = _build_attributes( params, SAUDI )
+
+      new( name: name,
+           attributes:  attributes )
+  end
+
+
   def self.build_doge( params )
     puts "==> image request params:"
     pp params

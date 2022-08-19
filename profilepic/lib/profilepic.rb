@@ -13,6 +13,7 @@ require_relative 'profilepic/helper'
 
 require_relative 'profilepic/config/yeoldepunks'
 require_relative 'profilepic/config/marcs'
+require_relative 'profilepic/config/saudis'
 require_relative 'profilepic/config/doge'
 require_relative 'profilepic/service'
 

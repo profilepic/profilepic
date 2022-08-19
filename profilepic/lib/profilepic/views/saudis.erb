@@ -1,0 +1,33 @@
+<p style="font-size: 80%;">
+    <a href="/">« Profile Pic(ture) As A Service</a>
+</p>
+
+
+<h1>Design Your Own Saudi Sheik (24×24) Wizard</h1>
+
+<p>Yes, you can!
+Generate your own originals that you
+own 100% forever.
+</p>
+
+
+
+<form action="/generate_saudis" method="get">
+
+<%= render_options( SAUDI ) %>
+
+<div>
+   <button type="submit" value="submit"
+        class="bigblue">Generate Profile Pic(ture) in .PNG Format</button>
+</div>
+
+</form>
+
+
+
+
+<script>
+var sheet = Spritesheet.read( 'saudis-24x24.png',
+`<%= spritesheet( 'saudis-24x24.csv' ) %>` );
+sheet.draw();
+</script>
