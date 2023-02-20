@@ -2,8 +2,8 @@
 # serve-up built-in spritesheet(s) and metadata
 FILES = {
   # doge
-  'doge-24x24.png' => "#{Shibainus.root}/config/spritesheet.png",
-  'doge-24x24.csv' => "#{Shibainus.root}/config/spritesheet.csv",
+  'doge-24x24.png' => "#{Pixelart::Module::Shibainus.root}/config/spritesheet.png",
+  'doge-24x24.csv' => "#{Pixelart::Module::Shibainus.root}/config/spritesheet.csv",
   # marcs
   'marcs-24x24.png' => "#{Pixelart::Module::Punks.root}/config/marcs-24x24.png",
   'marcs-24x24.csv' => "#{Pixelart::Module::Punks.root}/config/marcs-24x24.csv",
